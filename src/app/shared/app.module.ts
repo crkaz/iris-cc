@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Angular Material
 import {
-MatToolbarModule, MatButtonModule,
-MatInputModule, MatFormFieldModule,
+  MatToolbarModule, MatButtonModule,
+  MatInputModule, MatFormFieldModule,
 } from '@angular/material'
 
 // Components
@@ -26,6 +26,9 @@ import { HololensService } from 'src/app/shared/services/hololens.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    // Angular Material
+    MatToolbarModule, MatButtonModule,
+    MatInputModule, MatFormFieldModule,
     // Pages
     LoginComponent,
     DashboardComponent,
