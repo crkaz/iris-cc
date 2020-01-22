@@ -30,8 +30,8 @@ import { HololensService } from 'src/app/shared/services/hololens.service';
     MatToolbarModule, MatButtonModule,
     MatInputModule, MatFormFieldModule,
     // Pages
-    LoginComponent,
-    DashboardComponent,
+    // LoginComponent,
+    // DashboardComponent,
   ],
   providers: [
     // Services
