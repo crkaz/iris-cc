@@ -5,6 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './shell/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Angular Material
+import {
+MatToolbarModule, MatButtonModule,
+MatInputModule, MatFormFieldModule,
+} from '@angular/material'
+
+// Components
+import { LoginComponent } from 'src/app/pages/login/login.component';
+import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
+
+// Services
+import { HololensService } from 'src/app/shared/services/hololens.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -12,9 +25,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    // Pages
+    LoginComponent,
+    DashboardComponent,
   ],
-  providers: [],
+  providers: [
+    // Services
+    HololensService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
