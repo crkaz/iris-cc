@@ -4,11 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './shell/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 // Angular Material
 import {
   MatToolbarModule, MatButtonModule,
   MatInputModule, MatFormFieldModule,
+  MatIconModule, MatOptionModule,
 } from '@angular/material'
 
 // Components
@@ -29,6 +29,7 @@ import { HololensService } from 'src/app/shared/services/hololens.service';
     // Angular Material
     MatToolbarModule, MatButtonModule,
     MatInputModule, MatFormFieldModule,
+    MatIconModule, MatOptionModule,
     // Pages
     // LoginComponent,
     // DashboardComponent,
