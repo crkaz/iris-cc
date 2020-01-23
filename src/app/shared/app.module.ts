@@ -20,7 +20,10 @@ import { HololensService } from 'src/app/shared/services/hololens.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // Pages
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,9 +33,6 @@ import { HololensService } from 'src/app/shared/services/hololens.service';
     MatToolbarModule, MatButtonModule,
     MatInputModule, MatFormFieldModule,
     MatIconModule, MatOptionModule,
-    // Pages
-    // LoginComponent,
-    // DashboardComponent,
   ],
   providers: [
     // Services
