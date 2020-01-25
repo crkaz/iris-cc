@@ -13,15 +13,15 @@ const ASSET_PATH: string = "../../../assets/";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private readonly logo: string = "logo-2-lg-wcg-bi-cr";
+  private readonly logo: string = "logo-w";
 
-  public readonly toolbarColour: string = ToolbarColour.blue; // primary, warn, accent, "" (grey).
-  public readonly title: string = 'IRIS CC';
+  public readonly toolbarColour: string = ToolbarColour.blue;
+  public readonly title: string = 'IRIS-CC';
   public readonly slogan: string = "Command centre for IRIS enabled patients.";
-  public readonly logoPath = ASSET_PATH + this.logo + ".png";
+  public readonly logoPath = ASSET_PATH + "/logo/" + this.logo + ".png";
 
-  private formFields: FormGroup;
-  private fromUnity: any[];
+  public formFields: FormGroup;
+  public fromUnity: any[];
 
   constructor(
     private holoService: HololensService,

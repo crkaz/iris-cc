@@ -1,4 +1,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@font-face {
+    font-family: "headers";
+    src: url('/assets/fonts/GE\ Inspira\ Regular.ttf')
+}
+
 body {
     margin: 0;
 }
@@ -10,14 +15,15 @@ body {
 
 #header-title {
     position: absolute;
-    top: 11px;
-    font-size: 1.8rem;
+    top: 12px;
+    font-size: 2.5rem;
+    font-family: "headers";
 }
 
 #header-slogan {
     position: absolute;
-    top: 30px;
-    font-size: 0.8rem;
+    top: 35px;
+    font-size: 0.6rem;
     margin: 0;
 }
 
