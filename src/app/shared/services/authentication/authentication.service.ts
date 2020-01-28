@@ -7,11 +7,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { IUser } from "../../models/IUser";
 import { ToastService } from "../toast/toast.service";
-
-//@TODO: Change to a token.
-const COOKIE: string = "IRIS_CC_USER";
-const LOGIN_PAGE: string = "login";
-const LANDING_PAGE: string = "dashboard";
+import { UtilsService } from "../utils/utils.service"
 
 @Injectable({
   providedIn: "root"
@@ -21,11 +17,12 @@ export class AuthenticationService {
 
   // Returns true when user is looged in and email is verified
   get IsLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem(COOKIE));
+    const user = JSON.parse(localStorage.getItem(this.utils.USER_COOKIE));
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
   constructor(
+    private utils: UtilsService,
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
@@ -36,11 +33,11 @@ export class AuthenticationService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-        localStorage.setItem(COOKIE, JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem(COOKIE));
+        localStorage.setItem(this.utils.USER_COOKIE, JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem(this.utils.USER_COOKIE));
       } else {
-        localStorage.setItem(COOKIE, null);
-        JSON.parse(localStorage.getItem(COOKIE));
+        localStorage.setItem(this.utils.USER_COOKIE, null);
+        JSON.parse(localStorage.getItem(this.utils.USER_COOKIE));
       }
     });
   }
@@ -48,7 +45,7 @@ export class AuthenticationService {
   async LogIn(email: string, password: string) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password).then(result => {
-        this.router.navigate([LANDING_PAGE]);
+        this.router.navigate([this.utils.LANDING_PAGE]);
         this.SetUserData(result.user);
       }).catch(err => {
         console.log(err);
@@ -71,8 +68,8 @@ export class AuthenticationService {
 
   async LogOut() {
     return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem(COOKIE);
-      this.router.navigate([LOGIN_PAGE]);
+      localStorage.removeItem(this.utils.USER_COOKIE);
+      this.router.navigate([this.utils.LOGIN_PAGE]);
     }).catch(err => {
       console.log(err);
     });;

@@ -35,6 +35,7 @@ import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component'
 import { AuthenticationService } from './shared/services/authentication/authentication.service';
 import { ToastService } from './shared/services/toast/toast.service';
 import { IrisService } from './shared/services/iris/iris.service';
+import { UtilsService } from './shared/services/utils/utils.service';
 
 @NgModule({
   declarations: [
@@ -66,9 +67,10 @@ import { IrisService } from './shared/services/iris/iris.service';
   providers: [
     EventAggregatorRootModule,
     // Services
-    // AuthenticationService,
-    // ToastService,
-    // IrisService,
+    UtilsService,
+    AuthenticationService,
+    ToastService,
+    IrisService,
   ],
   bootstrap: [AppComponent]
 })
