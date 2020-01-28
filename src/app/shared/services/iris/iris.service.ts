@@ -5,7 +5,7 @@ import { AngularFireObject } from "@angular/fire/database";
 @Injectable({
   providedIn: 'root'
 })
-export class HololensService {
+export class IrisService {
   private result: AngularFireObject<any>;
 
   constructor(private db: AngularFireDatabase) { }

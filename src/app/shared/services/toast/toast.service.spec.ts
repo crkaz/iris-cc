@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HololensService } from './hololens.service';
+import { ToastService } from './toast.service';
 
-describe('HololensService', () => {
+describe('ToastService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HololensService = TestBed.get(HololensService);
+    const service: ToastService = TestBed.get(ToastService);
     expect(service).toBeTruthy();
   });
 });

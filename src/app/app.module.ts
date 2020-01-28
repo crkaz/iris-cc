@@ -14,21 +14,27 @@ import {
   MatToolbarModule, MatButtonModule,
   MatInputModule, MatFormFieldModule,
   MatIconModule, MatOptionModule,
+  MatSnackBarModule,
 } from '@angular/material'
 
 // Firebase Modules @TODO:
-import { environment } from "../../environments/environment";
+import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+
+// My modules.
+import { EventAggregatorModule, EventAggregatorRootModule } from './shared/event-aggregator/event-aggregator.module';
 
 // Components
 import { LoginComponent } from 'src/app/pages/login/login.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 
 // Services
-import { HololensService } from 'src/app/shared/services/hololens.service';
+import { AuthenticationService } from './shared/services/authentication/authentication.service';
+import { ToastService } from './shared/services/toast/toast.service';
+import { IrisService } from './shared/services/iris/iris.service';
 
 @NgModule({
   declarations: [
@@ -48,15 +54,21 @@ import { HololensService } from 'src/app/shared/services/hololens.service';
     MatToolbarModule, MatButtonModule,
     MatInputModule, MatFormFieldModule,
     MatIconModule, MatOptionModule,
+    MatSnackBarModule, 
     // Firebase modules
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    // AngularFireAuthModule,
-    // AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     AngularFireDatabaseModule,
+    // Event aggregator module.
+    EventAggregatorModule.forRoot(),
   ],
   providers: [
+    EventAggregatorRootModule,
     // Services
-    HololensService
+    // AuthenticationService,
+    // ToastService,
+    // IrisService,
   ],
   bootstrap: [AppComponent]
 })

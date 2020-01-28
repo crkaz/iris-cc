@@ -1,0 +1,29 @@
+<!--This is all static content that will be the same on every page. -->
+
+<!-- Page Toolbar -->
+<header>
+    <mat-toolbar color="{{toolbarColour}}">
+        <!-- Title and site logo -->
+        <img id="header-logo" src="{{logoPath}}">
+        <div>
+            <div id="header-title">{{title}}</div>
+            <div id="header-slogan">{{slogan}}</div>
+        </div>
+        <!-- <span id="header-title">{{ title }}</span>
+        <p id="header-slogan">{{slogan}}</p> -->
+        <span class="flex-fill"></span>
+        <!--  -->
+        <!-- Sign out button only shows if user is logged in. -->
+        <button mat-icon-button color="warn" (click)="LogOut()" type="button" class="ml-2" *ngIf="!IsLoggedIn">
+    <img src="{{logOutIconPath}}" />
+    <!--  -->
+      </button>
+    </mat-toolbar>
+</header>
+
+<div id="content" class="mx-auto mt-5 pl-5 pr-5">
+    <nav *ngIf="IsLoggedIn">
+    </nav>
+    <!-- This is the element that shows the current "page" in our single-page application. -->
+    <router-outlet></router-outlet>
+</div>

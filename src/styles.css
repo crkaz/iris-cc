@@ -1,32 +1,139 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* Adds bootstrap styles. */
+
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+
+/* Adds an angular-material theme. */
+
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+
+
+/* Custom fonts. */
+
 @font-face {
-    font-family: "headers";
+    font-family: GEInspiraRegular;
     src: url('/assets/fonts/GE\ Inspira\ Regular.ttf')
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
 }
 
 body {
     margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+nav {
+    width: 100%;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    overflow: auto;
+}
+
+nav ul li {
+    display: inline-block;
+    width: 33%;
+}
+
+hr {
+    background-color: #3f51b5;
 }
 
 #header-logo {
-    max-height: 50px;
-    margin-right: 15px;
+    max-height: 44px;
 }
 
 #header-title {
-    position: absolute;
-    top: 12px;
-    font-size: 2.2rem;
-    font-family: "headers";
+    font-family: "GEInspiraRegular";
+    font-size: 2rem;
+    color: white;
+    padding-left: 15px;
+    margin: 0;
+    line-height: 1.1;
+}
+
+#content {
+    max-width: 11in;
 }
 
 #header-slogan {
-    position: absolute;
-    top: 34px;
+    /* position: absolute;
+    top: 28px; */
+    padding-left: 15px;
     font-size: 0.6rem;
     margin: 0;
+    line-height: 1;
 }
 
 #content {
     text-align: center;
+}
+
+
+/* Material angular snackbar styling. */
+
+.success-toast {
+    color: #fff;
+    background-color: #4bb543;
+}
+
+.error-toast {
+    color: #fff;
+    background-color: #d8000c;
+}
+
+.mat-simple-snackbar {
+    color: white;
+}
+
+.blue-snackbar {
+    background-color: #e78c24;
+    color: #fff;
+}
+
+.mat-simple-snackbar-action {
+    color: #fff;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.message {
+    color: #3f51b5;
+    font-size: smaller;
+    font-style: italic;
+}
+
+.validated {
+    color: #4bb543;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #3f51b5;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #3f51b5;
+}
+
+.centre {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
 }

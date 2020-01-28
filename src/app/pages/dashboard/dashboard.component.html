@@ -1,1 +1,22 @@
 <p>dashboard works!</p>
+
+
+<!-- Unity controller. -->
+<p>This is a temporary form used to experiment with sending data to the hololens app from the website.</p>
+<div id="content">
+    <form [formGroup]="formFields">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>x</mat-label>
+                <input matInput placeholder="x" formControlName="x">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>y</mat-label>
+                <input matInput placeholder="y" formControlName="y">
+            </mat-form-field>
+        </p>
+        <button mat-button (click)="UpdateObject()">Send to Unity...</button>
+    </form>
+</div>
