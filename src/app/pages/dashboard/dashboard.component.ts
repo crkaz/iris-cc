@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IrisService } from 'src/app/shared/services/iris/iris.service';
-import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { IrisService } from '../../shared/services/iris/iris.service';
+import { ToastService } from '../../shared/services/toast/toast.service';
+import { UtilsService } from '../../shared/services/utils/utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
     private irisService: IrisService,
     public toastService: ToastService,
     private mFormBuilder: FormBuilder,
+    public utils: UtilsService, // Used in html.
   ) { }
 
   ngOnInit() {

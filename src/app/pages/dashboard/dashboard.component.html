@@ -1,7 +1,7 @@
 <h2>Dashboard</h2>
-<app-device-collection title="Attention Required"></app-device-collection>
-<app-device-collection title="Online"></app-device-collection>
-<app-device-collection title="Offline"></app-device-collection>
+<app-device-collection [collection]="utils.USER_COLLECTION.attention"></app-device-collection>
+<app-device-collection [collection]="utils.USER_COLLECTION.online"></app-device-collection>
+<app-device-collection [collection]="utils.USER_COLLECTION.offline"></app-device-collection>
 <!-- Unity controller. -->
 <br>
 <br>

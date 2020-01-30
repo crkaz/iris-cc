@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-device-card',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./device-card.component.css']
 })
 export class DeviceCardComponent implements OnInit {
+  @Input() backgroundColor: string;
 
   constructor() { }
 

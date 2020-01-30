@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IDeviceCollection } from '../../../shared/models/IDeviceCollection';
 
 @Component({
   selector: 'app-device-collection',
@@ -6,11 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./device-collection.component.css']
 })
 export class DeviceCollectionComponent implements OnInit {
-  @Input() title: string;
+  @Input() collection: IDeviceCollection;
 
   public placeholderIconPath: string = "../../../../assets/icons/x-circle.svg";
   public devices: any[];
   public nCols: number;
+  // MOCK DATA
+  n = (Math.random() * 10) / 2;
+  //\
 
   constructor() {
     this.devices = [];
@@ -19,8 +23,8 @@ export class DeviceCollectionComponent implements OnInit {
   ngOnInit() {
     this.CalculateNCols(); // Initialise mat-grids columns.
     // MOCK DATA
-    for (var i = 0; i < 3; ++i) {
-      // this.devices.push(new String("lol"));
+    for (var i = 0; i < this.n; ++i) {
+      this.devices.push(new String("lol"));
     }
     //\
   }
@@ -30,5 +34,20 @@ export class DeviceCollectionComponent implements OnInit {
     const width = window.innerWidth;
     this.nCols = width / 350;
     if (this.nCols <= 1) this.nCols = 1;
+  }
+
+  GetCardColour(): string {
+    switch (this.title) {
+      case "Attention Required":
+        return StatusColour.attention;
+      break;
+      case "Online":
+        return StatusColour.attention;
+      break;
+      case "Offline":
+        return StatusColour.attention;
+      break;
+    }
+    return "#FF";
   }
 }
