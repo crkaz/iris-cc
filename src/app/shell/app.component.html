@@ -4,20 +4,20 @@
 <header>
     <mat-toolbar color="{{toolbarColour}}">
         <!-- Title and site logo -->
-        <img id="header-logo" src="{{logoPath}}">
-        <div>
-            <div id="header-title">{{title}}</div>
-            <div id="header-slogan">{{slogan}}</div>
+        <div style="display:flex;" class="clickable hide-routerlink" [routerLink]="['/dashboard']">
+            <img id="header-logo" src="{{logoPath}}">
+            <div>
+                <div id="header-title">{{title}}</div>
+                <div id="header-slogan">{{slogan}}</div>
+            </div>
         </div>
-        <!-- <span id="header-title">{{ title }}</span>
-        <p id="header-slogan">{{slogan}}</p> -->
         <span class="flex-fill"></span>
         <!--  -->
+
         <!-- Sign out button only shows if user is logged in. -->
-        <button mat-icon-button color="warn" (click)="LogOut()" type="button" class="ml-2" *ngIf="authService.IsLoggedIn">
-    <img src="{{logOutIconPath}}" />
-    <!--  -->
-      </button>
+        <img src="{{logOutIconPath}}" class="clickable" (click)="LogOut()" *ngIf="authService.IsLoggedIn" />
+        <!--  -->
+
     </mat-toolbar>
 </header>
 

@@ -90,3 +90,7 @@ body {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
 }
+
+.hide-routerlink:focus {
+    outline: 0;
+}
