@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './shell/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Reactive Form Module @TODO:
+// Reactive Form Module
 import { ReactiveFormsModule } from "@angular/forms";
 import { FormsModule } from "@angular/forms";
 
@@ -14,10 +14,11 @@ import {
   MatToolbarModule, MatButtonModule,
   MatInputModule, MatFormFieldModule,
   MatIconModule, MatOptionModule,
-  MatSnackBarModule,
+  MatSnackBarModule, MatCardModule,
+  MatExpansionModule, MatGridListModule,
 } from '@angular/material'
 
-// Firebase Modules @TODO:
+// Firebase Modules
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
@@ -36,6 +37,8 @@ import { AuthenticationService } from './shared/services/authentication/authenti
 import { ToastService } from './shared/services/toast/toast.service';
 import { IrisService } from './shared/services/iris/iris.service';
 import { UtilsService } from './shared/services/utils/utils.service';
+import { DeviceCardComponent } from './components/device-collection/device-card/device-card.component';
+import { DeviceCollectionComponent } from './components/device-collection/device-collection/device-collection.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { UtilsService } from './shared/services/utils/utils.service';
     // Pages
     LoginComponent,
     DashboardComponent,
+    // Components
+    DeviceCardComponent,
+    DeviceCollectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,8 @@ import { UtilsService } from './shared/services/utils/utils.service';
     MatToolbarModule, MatButtonModule,
     MatInputModule, MatFormFieldModule,
     MatIconModule, MatOptionModule,
-    MatSnackBarModule, 
+    MatSnackBarModule, MatCardModule,
+    MatExpansionModule, MatGridListModule,
     // Firebase modules
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

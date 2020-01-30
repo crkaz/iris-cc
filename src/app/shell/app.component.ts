@@ -13,7 +13,7 @@ const ASSET_PATH: string = "../../../assets/";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private readonly logo: string = "logo";
+  private readonly logo: string = "logo-4";
 
   public readonly toolbarColour: string = ToolbarColour.blue;
   public readonly title: string = 'IRIS-CC';

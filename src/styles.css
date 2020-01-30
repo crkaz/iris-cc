@@ -2,12 +2,14 @@
 
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
-/* Adds an angular-material theme. */
+/* Add an angular-material theme.
 
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+deeppurple-amber.css
+indigo-pink.css
+pink-bluegrey.css
+purple-green.css */
 
-/* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
-
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 /* Custom fonts. */
 
@@ -27,29 +29,8 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-nav {
-    width: 100%;
-    text-align: center;
-}
-
-nav ul {
-    list-style-type: none;
-    width: 100%;
-    text-align: center;
-    overflow: auto;
-}
-
-nav ul li {
-    display: inline-block;
-    width: 33%;
-}
-
-hr {
-    background-color: #3f51b5;
-}
-
 #header-logo {
-    max-height: 44px;
+    max-height: 50px;
 }
 
 #header-title {
@@ -62,20 +43,15 @@ hr {
 }
 
 #content {
-    max-width: 11in;
+    /* max-width: 11in; */
+    text-align: center;
 }
 
 #header-slogan {
-    /* position: absolute;
-    top: 28px; */
     padding-left: 15px;
     font-size: 0.6rem;
     margin: 0;
     line-height: 1;
-}
-
-#content {
-    text-align: center;
 }
 
 
@@ -95,38 +71,15 @@ hr {
     color: white;
 }
 
-.blue-snackbar {
-    background-color: #e78c24;
-    color: #fff;
-}
-
 .mat-simple-snackbar-action {
     color: #fff;
 }
 
+
+/* Misc */
+
 .clickable:hover {
     cursor: pointer;
-}
-
-.message {
-    color: #3f51b5;
-    font-size: smaller;
-    font-style: italic;
-}
-
-.validated {
-    color: #4bb543;
-}
-
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #3f51b5;
-}
-
-.mat-radio-button.mat-accent .mat-radio-inner-circle,
-.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
-.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-    background-color: #3f51b5;
 }
 
 .centre {
