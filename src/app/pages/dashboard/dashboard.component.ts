@@ -12,6 +12,7 @@ import { UtilsService } from '../../shared/services/utils/utils.service';
 export class DashboardComponent implements OnInit {
   public formFields: FormGroup;
   public fromUnity: any[];
+  public users: any[]; // List of devices from firebase.
 
   constructor(
     private irisService: IrisService,
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Unity experiment.
     this.irisService
       .GetObject("/layout")
       .snapshotChanges()
@@ -28,13 +30,24 @@ export class DashboardComponent implements OnInit {
         let layout = data.payload.toJSON(); // Protocols list
         this.fromUnity = []; // Re-init list.
         for (var key in layout) {
-          console.log(key);
           let coord = layout[key];
-          console.log(layout);
-          console.log(coord);
           this.fromUnity.push(coord);
         }
       });
+
+      // Get devices/IRIS users.
+      this.irisService
+      .GetObject("/users")
+      .snapshotChanges()
+      .subscribe(data => {
+        let users = data.payload.toJSON(); // Protocols list
+        this.users = []; // Re-init list.
+        for (var key in users) {
+          let user = users[key];
+          this.users.push(user);
+        }
+      });
+
     this.InitForm();
   }
 

@@ -1,6 +1,6 @@
-<mat-card style="height: 100%; width: 100%;" [style.background]="backgroundColor">
+<mat-card style="height: 100%; width: 100%;" class="clickable" [style.background]="backgroundColor" (click)="LoadPatientData()">
     <!-- <mat-card-title>Title</mat-card-title> -->
     <mat-card-subtitle>Content</mat-card-subtitle>
     <!-- <mat-grid-tile-header>ID: </mat-grid-tile-header> -->
-    <mat-grid-tile-footer>ID:</mat-grid-tile-footer>
+    <mat-grid-tile-footer>ID: {{userID}}</mat-grid-tile-footer>
 </mat-card>

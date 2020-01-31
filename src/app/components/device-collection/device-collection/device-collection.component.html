@@ -3,12 +3,12 @@
 <hr>
 
 <mat-grid-list [cols]="nCols" rowHeight="2:1" gutterSize="30px" #grid (window:resize)="CalculateNCols()">
-    <mat-grid-tile *ngFor="let device of devices">
-        <app-device-card style="width: 97%; height:97%;" [backgroundColor]="collection.cardColour"></app-device-card>
+    <mat-grid-tile *ngFor="let user of users">
+        <app-device-card style="width: 97%; height:97%;" [backgroundColor]="collection.cardColour" [userID]="user"></app-device-card>
     </mat-grid-tile>
 </mat-grid-list>
 
-<div *ngIf="devices.length === 0">
+<div *ngIf="users.length === 0">
     <img src="{{placeholderIconPath}}">
     <p>No users to show.</p>
 </div>

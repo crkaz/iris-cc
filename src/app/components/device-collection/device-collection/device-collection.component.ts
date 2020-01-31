@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { IDeviceCollection } from '../../../shared/models/IDeviceCollection';
+import { IrisService } from '../../../shared/services/iris/iris.service';
 
 @Component({
   selector: 'app-device-collection',
@@ -8,25 +9,33 @@ import { IDeviceCollection } from '../../../shared/models/IDeviceCollection';
 })
 export class DeviceCollectionComponent implements OnInit {
   @Input() collection: IDeviceCollection;
+  @Input() fbKey: String;
 
   public placeholderIconPath: string = "../../../../assets/icons/x-circle.svg";
-  public devices: any[];
+  public users: any[];
   public nCols: number;
-  // MOCK DATA
-  n = (Math.random() * 10) / 2;
-  //\
 
-  constructor() {
-    this.devices = [];
+  constructor(public irisService: IrisService) {
+    this.users = []; // Reinit list.
   }
 
   ngOnInit() {
     this.CalculateNCols(); // Initialise mat-grids columns.
-    // MOCK DATA
-    for (var i = 0; i < this.n; ++i) {
-      this.devices.push(new String("lol"));
-    }
-    //\
+
+    // Subscribe to firebase collection.
+    this.irisService.GetObject("/users").snapshotChanges()
+      .subscribe(data => {
+        this.users = []; // Reinit list.
+        const users = data.payload.toJSON(); // Get users.
+
+        // Get users that fit this collection.
+        for (const key in users) {
+          const status = users[key];
+          if (status == this.fbKey) {
+            this.users.push(key);
+          }
+        }
+      });
   }
 
   /** Set the number of tile columns in the mat-grid, based on the current window with. */
@@ -34,20 +43,5 @@ export class DeviceCollectionComponent implements OnInit {
     const width = window.innerWidth;
     this.nCols = width / 350;
     if (this.nCols <= 1) this.nCols = 1;
-  }
-
-  GetCardColour(): string {
-    switch (this.title) {
-      case "Attention Required":
-        return StatusColour.attention;
-      break;
-      case "Online":
-        return StatusColour.attention;
-      break;
-      case "Offline":
-        return StatusColour.attention;
-      break;
-    }
-    return "#FF";
   }
 }

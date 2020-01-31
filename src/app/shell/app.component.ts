@@ -38,7 +38,6 @@ export class AppComponent {
         this.toastService.Success("Logged out successfully.");
       })
       .catch(err => {
-        this.toastService.Error("Something went wrong...");
         console.log("error: " + err);
       });
   }

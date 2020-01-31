@@ -42,6 +42,7 @@ import { AuthenticationService } from './shared/services/authentication/authenti
 import { ToastService } from './shared/services/toast/toast.service';
 import { IrisService } from './shared/services/iris/iris.service';
 import { UtilsService } from './shared/services/utils/utils.service';
+import { PatientComponent } from './pages/patient/patient/patient.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { UtilsService } from './shared/services/utils/utils.service';
     // Components
     DeviceCardComponent,
     DeviceCollectionComponent,
+    PatientComponent,
   ],
   imports: [
     BrowserModule,

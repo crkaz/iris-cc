@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
-
   constructor() { }
 
   public readonly USER_COOKIE = "IRIS_CC_USER"; //@TODO: Change to a token.
@@ -14,7 +14,7 @@ export class UtilsService {
   public readonly USER_COLLECTION = {
     attention: {
       collectionTitle: "Attention Required",
-      cardColour: "#e87d7d80"
+      cardColour: "#ff2b2b80"
     },
     online: {
       collectionTitle: "Online",

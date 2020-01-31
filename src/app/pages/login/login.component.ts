@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
-import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { ToastService } from '../../shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -32,14 +32,6 @@ export class LoginComponent implements OnInit {
     const username = this.formFields.get("fUsername").value;
     const password = this.formFields.get("fPassword").value;
 
-    this.authService
-      .LogIn(username, password)
-      .then(_ => {
-        this.toastService.Success("Welcome.");
-      })
-      .catch(err => {
-        this.toastService.Error("Invalid email or password.");
-        console.log("error: " + err);
-      });
+    this.authService.LogIn(username, password);
   }
 }

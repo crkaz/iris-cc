@@ -7,8 +7,10 @@ import { AngularFireObject } from "@angular/fire/database";
 })
 export class IrisService {
   private result: AngularFireObject<any>;
+  public users: any[];
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {
+  }
 
   Talk() {
     // Send data to a target Hololens device.
