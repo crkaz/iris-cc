@@ -1,0 +1,27 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <h5>{{selectedPatient.uid}}</h5>
+        </mat-panel-title>
+        <!-- <mat-panel-description>
+            Type your name and age
+        </mat-panel-description> -->
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+        <p class="text-left">This may include various fields that can be used as a reference when interacting with the patient to make informed changes etc.</p>
+        <div style="display:flex;">
+            <span class="flex-fill"></span>
+            <span><button mat-button>Edit</button>
+            </span>
+        </div>
+    </ng-template>
+    <!-- 
+    <mat-form-field>
+        <input matInput placeholder="First name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Age">
+    </mat-form-field> -->
+</mat-expansion-panel>

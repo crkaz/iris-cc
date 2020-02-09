@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { IDeviceCollection } from '../../../shared/models/IDeviceCollection';
-import { IrisService } from '../../../shared/services/iris/iris.service';
+import { IDeviceCollection } from '../../shared/models/IDeviceCollection';
+import { IrisService } from '../../shared/services/iris/iris.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-device-collection',
@@ -12,27 +13,30 @@ export class DeviceCollectionComponent implements OnInit {
   @Input() fbKey: String;
 
   public placeholderIconPath: string = "../../../../assets/icons/x-circle.svg";
-  public users: any[];
+  public patients: any[];
   public nCols: number;
 
-  constructor(public irisService: IrisService) {
-    this.users = []; // Reinit list.
+  constructor(
+    public irisService: IrisService,
+    private router: Router,
+  ) {
+    this.patients = []; // Reinit list.
   }
 
   ngOnInit() {
     this.CalculateNCols(); // Initialise mat-grids columns.
 
     // Subscribe to firebase collection.
-    this.irisService.GetObject("/users").snapshotChanges()
+    this.irisService.GetObject("/patients").snapshotChanges()
       .subscribe(data => {
-        this.users = []; // Reinit list.
-        const users = data.payload.toJSON(); // Get users.
+        this.patients = []; // Reinit list.
+        const patients = data.payload.toJSON(); // Get patients.
 
-        // Get users that fit this collection.
-        for (const key in users) {
-          const status = users[key];
+        // Get patients that fit this collection.
+        for (const key in patients) {
+          const status = patients[key]["status"];
           if (status == this.fbKey) {
-            this.users.push(key);
+            this.patients.push(key);
           }
         }
       });
@@ -43,5 +47,11 @@ export class DeviceCollectionComponent implements OnInit {
     const width = window.innerWidth;
     this.nCols = width / 350;
     if (this.nCols <= 1) this.nCols = 1;
+  }
+
+  LoadPatient(patientUID: string) {
+    // @TODO: Make specific  patient.
+    this.irisService.LoadPatient(patientUID)
+    this.router.navigate(["patient"])
   }
 }

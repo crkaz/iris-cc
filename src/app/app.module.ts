@@ -16,6 +16,7 @@ import {
   MatIconModule, MatOptionModule,
   MatSnackBarModule, MatCardModule,
   MatExpansionModule, MatGridListModule,
+  MatSlideToggleModule, MatSliderModule,
 } from '@angular/material'
 
 // Firebase Modules
@@ -28,21 +29,24 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 // My modules.
 import { EventAggregatorModule, EventAggregatorRootModule } from './shared/event-aggregator/event-aggregator.module';
 
-// Pages
-import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { DeviceComponent } from './pages/device/device/device.component';
-
-// Components
-import { DeviceCardComponent } from './components/device-collection/device-card/device-card.component';
-import { DeviceCollectionComponent } from './components/device-collection/device-collection/device-collection.component';
-
 // Services
 import { AuthenticationService } from './shared/services/authentication/authentication.service';
 import { ToastService } from './shared/services/toast/toast.service';
 import { IrisService } from './shared/services/iris/iris.service';
 import { UtilsService } from './shared/services/utils/utils.service';
-import { PatientComponent } from './pages/patient/patient/patient.component';
+
+// Pages
+import { LoginComponent } from './pages/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DeviceComponent } from './pages/patient/device.component';
+
+// Components
+import { DeviceCollectionComponent } from './components/device-collection/device-collection.component';
+import { PatientInfoComponent } from './components/patient-info/patient-info.component';
+import { DeviceConfigComponent } from './components/device-config/device-config.component';
+import { DeviceAnalyticsComponent } from './components/device-analytics/device-analytics.component';
+import { DashTileComponent } from './components/dash-tile/dash-tile.component';
+import { DashTilesPanelComponent } from './components/dash-tiles-panel/dash-tiles-panel.component';
 
 @NgModule({
   declarations: [
@@ -52,9 +56,12 @@ import { PatientComponent } from './pages/patient/patient/patient.component';
     DashboardComponent,
     DeviceComponent,
     // Components
-    DeviceCardComponent,
     DeviceCollectionComponent,
-    PatientComponent,
+    PatientInfoComponent,
+    DeviceConfigComponent,
+    DeviceAnalyticsComponent,
+    DashTileComponent,
+    DashTilesPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +76,7 @@ import { PatientComponent } from './pages/patient/patient/patient.component';
     MatIconModule, MatOptionModule,
     MatSnackBarModule, MatCardModule,
     MatExpansionModule, MatGridListModule,
+    MatSlideToggleModule, MatSliderModule,
     // Firebase modules
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

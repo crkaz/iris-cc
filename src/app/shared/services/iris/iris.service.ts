@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { AngularFireObject } from "@angular/fire/database";
+import { IPatient } from '../../models/IPatient';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,31 @@ import { AngularFireObject } from "@angular/fire/database";
 export class IrisService {
   private result: AngularFireObject<any>;
   public users: any[];
+  private selectedPatient: IPatient;
 
   constructor(private db: AngularFireDatabase) {
+    // Initialise a patient.
+    this.selectedPatient = {
+      uid:"",
+      calendar:"",
+      config:"",
+      info:"",
+      log:"",
+      notifications:"",
+      status:"",
+    };
   }
 
-  Talk() {
-    // Send data to a target Hololens device.
-  }
+  //#region Getters.
 
-  Listen() {
-    // Read data from a target Hololens device.
+  public get SelectedPatient() { return this.selectedPatient; }
+
+  //#endregion
+
+  LoadPatient(patientUID: string) {
+    // const obj = this.GetObject("/patients/" + patientUID)
+    // this.selectedPatient = obj as IPatient;
+    this.selectedPatient.uid = patientUID;
   }
 
   GetObject(path: string) {

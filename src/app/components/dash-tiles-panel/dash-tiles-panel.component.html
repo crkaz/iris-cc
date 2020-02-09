@@ -1,0 +1,7 @@
+<mat-grid-list cols="3" rowHeight="2:1" #grid>
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.colSpan">
+        <app-dash-tile [backgroundColour]="tile.backgroundColour" [imgPath]="tile.imgPath" [onClick]="tile.onClick"
+            style="height: 100%; width: 100%;">
+        </app-dash-tile>
+    </mat-grid-tile>
+</mat-grid-list>
