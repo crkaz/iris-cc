@@ -1,7 +1,7 @@
-<mat-grid-list cols="3" rowHeight="2:1" #grid>
-    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.colSpan">
-        <app-dash-tile [backgroundColour]="tile.backgroundColour" [imgPath]="tile.imgPath" [onClick]="tile.onClick"
-            style="height: 100%; width: 100%;">
-        </app-dash-tile>
+<mat-grid-list cols="3" rowHeight="2:0.8" #grid gutterSize="10px" style="margin: 10px 0px;">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.colSpan" [style.background]="tile.backgroundColour" style="border-radius: 3px;" class="shadow">
+        <img src="{{tile.imgPath}}" style="height:60%">
+        <!-- <app-dash-tile [backgroundColour]="tile.backgroundColour" [imgPath]="tile.imgPath" [onClick]="tile.onClick" style="height: 100%; width: 100%;">
+        </app-dash-tile> -->
     </mat-grid-tile>
 </mat-grid-list>

@@ -13,15 +13,16 @@ export class IrisService {
 
   constructor(private db: AngularFireDatabase) {
     // Initialise a patient.
-    this.selectedPatient = {
-      uid:"",
-      calendar:"",
-      config:"",
-      info:"",
-      log:"",
-      notifications:"",
-      status:"",
-    };
+    this.selectedPatient = null;
+    // {
+    //   uid: "",
+    //   calendar: "",
+    //   config: "",
+    //   info: "",
+    //   log: "",
+    //   notifications: "",
+    //   status: "",
+    // };
   }
 
   //#region Getters.
@@ -30,18 +31,28 @@ export class IrisService {
 
   //#endregion
 
-  LoadPatient(patientUID: string) {
-    // const obj = this.GetObject("/patients/" + patientUID)
-    // this.selectedPatient = obj as IPatient;
-    this.selectedPatient.uid = patientUID;
+  public LoadPatient(patientUID: string) {
+    this.GetObject("/patients/" + patientUID).snapshotChanges()
+      .subscribe(data => {
+        const json = data.payload.toJSON();
+        this.selectedPatient = {
+          uid: patientUID,
+          calendar: json["calendar"],
+          config: json["config"],
+          info: json["info"],
+          log: json["log"],
+          notifications: json["notifications"],
+          status: json["status"],
+        }
+      });
   }
 
-  GetObject(path: string) {
+  public GetObject(path: string) {
     this.result = this.db.object(path);
     return this.result;
   }
 
-  UpdateObject(xnew, ynew): boolean {
+  public UpdateObject(xnew, ynew): boolean {
     this.GetObject("/layout"); // set database ref to protocol 
 
     this.result.update({

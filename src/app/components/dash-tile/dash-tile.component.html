@@ -1,11 +1,8 @@
-<mat-card class="clickable" [style.background]="backgroundColour" style="width: 100%; height: 100%;" class="a"
-    (click)="Callback()">
-    <mat-grid-tile-header *ngIf="header">{{header}}</mat-grid-tile-header>
-    <mat-card-title *ngIf="imgPath">
-        <img *ngIf="imgPath" src="{{imgPath}}">
-    </mat-card-title>    
+<mat-card class="clickable" [style.background]="backgroundColour" style="width: 100%; height: 100%;" (click)="Callback()">
+    <img *ngIf="imgPath " src="{{imgPath}}" style="height:100%;">
+    <mat-grid-tile-header *ngIf="header ">{{header}}</mat-grid-tile-header>
     <mat-card-subtitle>
-        <p *ngIf="text">{{text}}</p>
+        <p *ngIf="text ">{{text}}</p>
     </mat-card-subtitle>
-    <mat-grid-tile-footer *ngIf="footer">{{footer}}</mat-grid-tile-footer>
+    <mat-grid-tile-footer *ngIf="footer ">{{footer}}</mat-grid-tile-footer>
 </mat-card>

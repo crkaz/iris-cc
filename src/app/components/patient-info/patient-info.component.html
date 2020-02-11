@@ -1,7 +1,7 @@
-<mat-expansion-panel>
+<mat-expansion-panel expanded>
     <mat-expansion-panel-header>
         <mat-panel-title>
-            <h5>{{selectedPatient.uid}}</h5>
+            <h5>Patient Information</h5>
         </mat-panel-title>
         <!-- <mat-panel-description>
             Type your name and age
@@ -9,7 +9,9 @@
     </mat-expansion-panel-header>
 
     <ng-template matExpansionPanelContent>
-        <p class="text-left">This may include various fields that can be used as a reference when interacting with the patient to make informed changes etc.</p>
+        <!-- <h6>{{irisService.SelectedPatient.uid}}</h6> -->
+        <p class="text-left">{{PatientInfo.notes}}</p>
+        <!-- <p class="text-left">{{irisService.SelectedPatient.info.notes}}</p> -->
         <div style="display:flex;">
             <span class="flex-fill"></span>
             <span><button mat-button>Edit</button>

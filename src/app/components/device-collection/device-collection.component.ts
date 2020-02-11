@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IDeviceCollection } from '../../shared/models/IDeviceCollection';
 import { IrisService } from '../../shared/services/iris/iris.service';
 import { Router } from '@angular/router';
@@ -43,15 +43,15 @@ export class DeviceCollectionComponent implements OnInit {
   }
 
   /** Set the number of tile columns in the mat-grid, based on the current window with. */
-  CalculateNCols() {
+  private CalculateNCols() {
     const width = window.innerWidth;
     this.nCols = width / 350;
     if (this.nCols <= 1) this.nCols = 1;
   }
 
-  LoadPatient(patientUID: string) {
-    // @TODO: Make specific  patient.
-    this.irisService.LoadPatient(patientUID)
-    this.router.navigate(["patient"])
+  /** Set the iris service selected patient to the patient witht the given uid. */
+  private LoadPatient(patientUID: string) {
+    this.irisService.LoadPatient(patientUID);
+    this.router.navigate(["patient"]);
   }
 }

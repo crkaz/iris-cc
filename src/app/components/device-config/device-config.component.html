@@ -15,7 +15,7 @@
         <!-- <ng-template matExpansionPanelContent> -->
         <mat-slide-toggle>Voice</mat-slide-toggle>
         <mat-slide-toggle>Gaze</mat-slide-toggle>
-        <mat-slide-toggle>Guesture</mat-slide-toggle>
+        <mat-slide-toggle>Gesture</mat-slide-toggle>
         <!-- </ng-template> -->
         <!-- </mat-expansion-panel> -->
         <!--  -->
@@ -30,29 +30,47 @@
         <!-- </mat-expansion-panel-header> -->
 
         <!-- <ng-template matExpansionPanelContent> -->
+
+        <p>
+            <mat-slide-toggle>Assitance Prompts</mat-slide-toggle>
+            <mat-slider></mat-slider>
+            Use machine learning and heuristics to identify when a user may need help.
+        </p>
+
         <p>
             <mat-slide-toggle>Object Detection</mat-slide-toggle>
             <mat-slider></mat-slider>
+            Use computer vision to analyse the user's field of view and report detected objects and locations.
         </p>
 
         <p>
-            <mat-slide-toggle>Gaze</mat-slide-toggle>
+            <mat-slide-toggle>Fall Detection</mat-slide-toggle>
             <mat-slider></mat-slider>
+            Use head tracking and machine learning to alert of potential falls.
         </p>
 
         <p>
-            <mat-slide-toggle>Guesture</mat-slide-toggle>
+            <mat-slide-toggle>Item Tracking</mat-slide-toggle>
             <mat-slider></mat-slider>
+            Use spatial anchors to remember the location of significant places or items.
         </p>
 
         <p>
-            <mat-slide-toggle>Voice</mat-slide-toggle>
+            <mat-slide-toggle>Sticky Notes</mat-slide-toggle>
             <mat-slider></mat-slider>
+            Use spatial anchors to create virtual sticky notes.
         </p>
 
         <p>
-            <mat-slide-toggle>Gaze</mat-slide-toggle>
+            <mat-slide-toggle>Photo Diary</mat-slide-toggle>
             <mat-slider></mat-slider>
+            Periodically take a picture automatically for the user to review if they wish.
+        </p>
+
+        <p>
+            <mat-slide-toggle>Activity Suggestions</mat-slide-toggle>
+            <mat-slider></mat-slider>
+            Use machine learning and computer vision to identify the location of the user and provide context sensitive instructions e.g. steps to make a coffee.
         </p>
 
         <!-- </ng-template> -->
