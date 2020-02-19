@@ -24,7 +24,7 @@ export interface IConfig {
         enabled: boolean;
         sensitivity: number;
     };
-    guestureInput: {
+    gestureInput: {
         enabled: boolean;
     };
     speechInput: {

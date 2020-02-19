@@ -44,6 +44,16 @@ export class IrisService {
 
     return true;
   }
+  //**TODO: CHANGE TO UPDATE OBJECT WHEN GETTING RID OF UNITY TEST */
+  UpdateObj(collection: string, updatedObj: object) {
+    let uid = this.selectedPatient.uid;
+    this.GetObject("/patients/" + uid + "/" + collection);// + collection + "/"); // set database ref to protocol 
+    this.result.set(updatedObj);
+
+    // this.result.update({
+    //   value
+    // })
+  }
 }
 
 // import { Injectable } from "@angular/core";
