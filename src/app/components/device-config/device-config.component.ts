@@ -8,12 +8,12 @@ import { IConfig } from 'src/app/shared/models/IPatient';
   styleUrls: ['./device-config.component.css']
 })
 export class DeviceConfigComponent implements OnInit {
-  constructor(private iris: IrisService) { }
+  constructor(public iris: IrisService) { }
 
   ngOnInit() {
   }
 
-  private SaveConfig() {
+  public SaveConfig() {
     // @TODO: needs to pull from form.
     let config: IConfig = {
       gazeInput: { enabled: true, sensitivity: 10 },

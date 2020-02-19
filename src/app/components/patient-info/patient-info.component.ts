@@ -7,7 +7,7 @@ import { IrisService } from 'src/app/shared/services/iris/iris.service';
   styleUrls: ['./patient-info.component.css']
 })
 export class PatientInfoComponent implements OnInit {
-  constructor(private iris: IrisService) { }
+  constructor(public iris: IrisService) { }
 
   ngOnInit() {
   }

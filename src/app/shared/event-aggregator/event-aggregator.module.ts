@@ -1,5 +1,5 @@
 // Default imports:
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventAggregator } from './EventAggregator';
 
@@ -9,7 +9,7 @@ import { EventAggregator } from './EventAggregator';
 })
 export class EventAggregatorModule {
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<EventAggregatorModule> {
     return {
       ngModule: EventAggregatorModule,
       providers: [EventAggregator]
@@ -17,6 +17,7 @@ export class EventAggregatorModule {
   }
 }
 
+@Injectable()
 @NgModule({
   exports: [EventAggregatorModule],
   providers: [EventAggregator],
