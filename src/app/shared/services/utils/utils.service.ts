@@ -25,4 +25,9 @@ export class UtilsService {
       cardColour: "#b3b3b380"
     }
   }
+  
+  /** Delay for a number milliseconds. */
+  public Delay(ms: number) {
+    return new Promise(_ => setTimeout(_, ms));
+  }
 }

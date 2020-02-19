@@ -1,27 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { AngularFireObject } from "@angular/fire/database";
-import { IPatient } from '../../models/IPatient';
+import { IPatient, IInfo } from '../../models/IPatient';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IrisService {
   private result: AngularFireObject<any>;
-  public users: any[];
+  public patients: any[];
   private selectedPatient: IPatient;
 
   constructor(private db: AngularFireDatabase) {
-    // Initialise a patient.
-    this.selectedPatient = {
-      uid:"",
-      calendar:"",
-      config:"",
-      info:"",
-      log:"",
-      notifications:"",
-      status:"",
-    };
+    this.selectedPatient = null;
   }
 
   //#region Getters.
@@ -31,12 +22,14 @@ export class IrisService {
   //#endregion
 
   LoadPatient(patientUID: string) {
-    // const obj = this.GetObject("/patients/" + patientUID)
-    // this.selectedPatient = obj as IPatient;
-    this.selectedPatient.uid = patientUID;
+    this.GetObject("/patients/" + patientUID).snapshotChanges()
+      .subscribe(data => {
+        this.selectedPatient = data.payload.toJSON(); // Get patients.
+        this.selectedPatient.uid = patientUID;
+      })
   }
 
-  GetObject(path: string) {
+  GetObject(path: string): any {
     this.result = this.db.object(path);
     return this.result;
   }

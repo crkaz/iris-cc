@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IPatient } from 'src/app/shared/models/IPatient';
 import { IrisService } from 'src/app/shared/services/iris/iris.service';
 
 @Component({
@@ -8,12 +7,11 @@ import { IrisService } from 'src/app/shared/services/iris/iris.service';
   styleUrls: ['./patient-info.component.css']
 })
 export class PatientInfoComponent implements OnInit {
-  public selectedPatient: IPatient; // HTML binding.
-
-  constructor(private irisService: IrisService) {
-    this.selectedPatient = this.irisService.SelectedPatient;
-  }
+  constructor(private iris: IrisService) { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
   }
 }

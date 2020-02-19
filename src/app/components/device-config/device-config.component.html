@@ -13,9 +13,9 @@
         <!-- </mat-expansion-panel-header> -->
 
         <!-- <ng-template matExpansionPanelContent> -->
-        <mat-slide-toggle>Voice</mat-slide-toggle>
-        <mat-slide-toggle>Gaze</mat-slide-toggle>
-        <mat-slide-toggle>Guesture</mat-slide-toggle>
+        <mat-slide-toggle [checked]="iris.SelectedPatient.config.speechInput.enabled">Voice</mat-slide-toggle>
+        <mat-slide-toggle [checked]="iris.SelectedPatient.config.gazeInput.enabled">Gaze</mat-slide-toggle>
+        <mat-slide-toggle [checked]="iris.SelectedPatient.config.gestureInput.enabled">Guesture</mat-slide-toggle>
         <!-- </ng-template> -->
         <!-- </mat-expansion-panel> -->
         <!--  -->
@@ -31,6 +31,7 @@
 
         <!-- <ng-template matExpansionPanelContent> -->
         <p>
+
             <mat-slide-toggle>Object Detection</mat-slide-toggle>
             <mat-slider></mat-slider>
         </p>
