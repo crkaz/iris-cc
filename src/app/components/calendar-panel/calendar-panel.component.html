@@ -1,0 +1,22 @@
+<h5>Calendar</h5>
+<div style="text-align: left; overflow-x: hidden;" class="mat-scroll  px-2 pb-4" [style.height.px]="SectionHeight"
+    (window:resize)="OnResize($event)">
+    <!-- VIEW -->
+    <div *ngIf="!creating">
+        <button mat-raised-button color="primary" class="w-100" (click)="creating = true;">ADD CALENDAR ENTRY</button>
+        <app-calendar-view></app-calendar-view>
+    </div>
+    <!-- CREATE -->
+    <div *ngIf="creating">
+        <app-calendar-create *ngIf="creating"></app-calendar-create>
+        <div class="row pt-4">
+            <button mat-button class="hide-routerlink col-5" (click)="creating = false;">
+                CANCEL
+            </button>
+            <div class=col-2></div>
+            <button mat-buttontype="submit" class="hide-routerlink col-5">
+                CREATE
+            </button>
+        </div>
+    </div>
+</div>

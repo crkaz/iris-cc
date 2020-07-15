@@ -1,0 +1,42 @@
+<!--This is all static content that will be the same on every page. -->
+
+<!-- Page Toolbar -->
+<header>
+    <mat-toolbar color="{{toolbarColour}}" style="height:64px;">
+        <!-- Title and site logo -->
+        <div style="display:flex;" class="clickable hide-routerlink" [routerLink]="['/dashboard']">
+            <img id="header-logo" src="{{logoPath}}">
+            <div>
+                <div id="header-title">{{title}}</div>
+                <div id="header-slogan">{{slogan}}</div>
+            </div>
+        </div>
+        <span class="flex-fill"></span>
+        <!--  -->
+
+        <!-- Sign out button only shows if user is logged in. -->
+        <!-- <img src="{{logOutIconPath}}" class="clickable" (click)="LogOut()" *ngIf="authService.IsLoggedIn" /> -->
+        <mat-icon class="clickable" (click)="LogOut()" *ngIf="!authService.IsLoggedIn" (click)="ToggleMenu()">settings
+        </mat-icon>
+        <div id="nav-menu" *ngIf="showMenu">
+            <ul class="small">
+                <li class="nav-item" routerLink="/admin" (click)="ToggleMenu()">
+                    <button mat-button class="w-100 pl-2 pr-2">Admin Panel</button></li>
+                <li class="nav-item" (click)="ToggleMenu()"><button mat-button class="w-100 pl-2 pr-2">Change
+                        Password</button></li>
+                <li class="nav-item" (click)="ToggleMenu()"><button mat-button class="w-100 pl-2 pr-2">Sign
+                        Out</button></li>
+            </ul>
+        </div>
+
+        <!--  -->
+
+    </mat-toolbar>
+</header>
+
+<div id="content" class="mx-auto mt-5 pl-5 pr-5 pb-5">
+    <nav *ngIf="authService.IsLoggedIn">
+    </nav>
+    <!-- This is the element that shows the current "page" in our single-page application. -->
+    <router-outlet></router-outlet>
+</div>

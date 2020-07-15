@@ -1,0 +1,12 @@
+<!-- Display only the page title -->
+<div style="text-align: left;" *ngIf="!backButton">
+    <h3 class="d-inline">{{pageTitle}}</h3>
+</div>
+
+<!-- Display the page title and a back button. Outer div corrects 'back' arrow fixed pos. -->
+<div style="position: relative;">
+    <div style="text-align: left;" *ngIf="backButton">
+        <mat-icon class="d-inline-block mr-4 clickable" style="position: absolute; font-size: 1.85rem;" (click)="GoBack()">arrow_back</mat-icon>
+        <h3 class="d-inline ml-5">{{pageTitle}}</h3>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<mat-card class="h-100 w-100">
+    <mat-card-title style="text-align: left;">Patient Information</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="mt-4" style="text-align: left;">
+        <!-- ID -->
+        <p>
+            <span><b>Id: </b></span>
+            <span>#{{patientId}}</span>
+        </p>
+
+        <!-- AGE -->
+        <p>
+            <span><b>Age: </b></span>
+            <span>{{patientAge}}</span>
+        </p>
+
+        <!-- DIAGNOSIS -->
+        <p>
+            <span><b>Diagnosis: </b></span>
+            <span>{{patientDiagnosis}}</span>
+        </p>
+
+        <!-- NOTES -->
+        <p>
+            <span><b>Notes: </b></span>
+            <span>{{patientNotes}}</span>
+        </p>
+
+        <!-- EDIT BUTTON -->
+        <button mat-button style="position:absolute; bottom: 10px; right: 10px;"
+            class="hide-routerlink pl-4 pr-4">EDIT</button>
+    </mat-card-content>
+</mat-card>

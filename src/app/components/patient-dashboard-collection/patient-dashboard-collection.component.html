@@ -1,0 +1,15 @@
+<mat-card class=mt-4>
+    <mat-card-title style="text-align: left;">{{title}}</mat-card-title>
+    <mat-divider></mat-divider>
+    <!-- PATIENT CARDS -->
+    <mat-grid-list [cols]="colSize" rowHeight="1.5:1" #grid gutterSize="10px" class="mt-4" (window:resize)="onResize($event)">
+        <mat-grid-tile [colspan]="1" [style.background]="colour" style="border-radius: 3px;" class="shadow" *ngFor="let patient of patients">
+            <app-patient-dashboard-card class="w-100 h-100" [patient]="patient"></app-patient-dashboard-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div *ngIf="patients.length === 0">
+        <mat-icon>supervised_user_circle</mat-icon>
+        <p>No patients to show in this category.</p>
+    </div>
+</mat-card>

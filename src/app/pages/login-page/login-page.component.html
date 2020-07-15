@@ -1,0 +1,26 @@
+<mat-card class="col-10 mx-auto" style="max-width: 400px;">
+    <form [formGroup]="formFields">
+        <!-- LOGO -->
+        <img src="../../../assets/logo/logo-dark.png" style="max-width: 150px;" class="m-4">
+
+        <!-- USERNAME FIELD -->
+        <mat-form-field class="col-12">
+            <input matInput placeholder="Username" formControlName="fUsername" type="email" />
+        </mat-form-field>
+
+        <!-- PASSWORD FIELD -->
+        <mat-form-field class="col-12">
+            <input matInput placeholder="Password" formControlName="fPassword" type="password" />
+        </mat-form-field>
+
+        <!-- FORGOT PASSWORD -->
+        <label class="small"><u><a href="#">Forgot password?</a></u></label>
+
+        <!-- LOGIN BUTTON -->
+        <div class="row justify-content-around m-3">
+            <button mat-button class="col-12" (click)="LogIn()">
+                LOGIN
+            </button>
+        </div>
+    </form>
+</mat-card>

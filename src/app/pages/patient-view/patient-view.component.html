@@ -1,0 +1,32 @@
+<!-- PAGE TITLE/BACK BUTTON -->
+<app-page-title pageTitle="Patient View" backButton="show"></app-page-title>
+
+<!-- (window:resize)="onResize($event)" -->
+<mat-grid-list [cols]="nCols" rowHeight="50px" #grid gutterSize="30px" class="mt-4" (window:resize)="onResize($event)">
+
+    <!-- PATIENT INFO CARD -->
+    <mat-grid-tile [colspan]="patientInfoCols" [rowspan]="4" style="border-radius: 3px;" class="shadow">
+        <app-patient-info class="w-100 h-100"></app-patient-info>
+    </mat-grid-tile>
+
+    <!-- PATIENT MANAGEMENT CARD -->
+    <mat-grid-tile [colspan]="patientManagementCols" [rowspan]="7" style="border-radius: 3px;" class="shadow">
+        <app-patient-management class="w-100 h-100"></app-patient-management>
+    </mat-grid-tile>
+
+    <!-- ACTIVITY LOGS CARD -->
+    <mat-grid-tile [colspan]="activityLogsCols" [rowspan]="7" style="border-radius: 3px;" class="shadow">
+        <app-patient-activity-logs class="w-100 h-100"></app-patient-activity-logs>
+    </mat-grid-tile>
+
+    <!-- STATISTICS CARD -->
+    <mat-grid-tile [colspan]="statisticsCols" [rowspan]="4" style="border-radius: 3px;" class="shadow">
+        <app-patient-statistics class="w-100 h-100"></app-patient-statistics>
+    </mat-grid-tile>
+
+    <!-- TIME-ACTIVITY PLOT CARD -->
+    <mat-grid-tile [colspan]="activityPlotCols" [rowspan]="4" style="border-radius: 3px;" class="shadow">
+        <app-patient-time-activity-plot class="w-100 h-100"></app-patient-time-activity-plot>
+    </mat-grid-tile>
+
+</mat-grid-list>

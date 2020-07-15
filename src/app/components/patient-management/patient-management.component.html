@@ -1,0 +1,26 @@
+<mat-card class="h-100 w-100">
+    <mat-card-title style="text-align: left;">Patient Management</mat-card-title>
+    <mat-divider></mat-divider>
+    <!-- TOGGLE BUTTONS -->
+    <mat-grid-list cols="3" rowHeight="4:1" #grid gutterSize="10px" class="mt-4 mb-4" #matGridList>
+        <mat-grid-tile colspan="1" style="border-radius: 3px; min-height: 40px;" class="shadow" matTooltip="Configure">
+            <app-patient-management-toggle icon="settings" index="0" class="clickable h-100 w-100"
+                (selectionChanged)="LoadContent(0)">
+            </app-patient-management-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" style="border-radius: 3px; min-height: 40px;" class="shadow" matTooltip="Calendar">
+            <app-patient-management-toggle icon="date_range" index="1" class="clickable h-100 w-100"
+                (selectionChanged)="LoadContent(1)">
+            </app-patient-management-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" style="border-radius: 3px; min-height: 40px;" class="shadow" matTooltip="Message">
+            <app-patient-management-toggle icon="message" index="2" class="clickable h-100 w-100"
+                (selectionChanged)="LoadContent(2)">
+            </app-patient-management-toggle>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <!-- TOGGLED CONTENT -->
+    <app-settings-panel *ngIf="selectedIndex == 0" [toggleButtons]=matGridList></app-settings-panel>
+    <app-calendar-panel *ngIf="selectedIndex == 1" [toggleButtons]=matGridList></app-calendar-panel>
+    <app-messaging-panel *ngIf="selectedIndex == 2" [toggleButtons]=matGridList></app-messaging-panel>
+</mat-card>

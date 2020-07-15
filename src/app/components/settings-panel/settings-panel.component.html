@@ -1,0 +1,29 @@
+<h5>Patient Configuration</h5>
+<div style="text-align: left;" class="mat-scroll px-2 pb-4" [style.height.px]="SectionHeight"
+    (window:resize)="onResize($event)">
+    <!-- INPUT -->
+    <section>
+        <p><b>Input Methods:</b></p>
+        <mat-slide-toggle matTooltip="Toggle gesture input on the patient's device.">Gesture</mat-slide-toggle>
+        <mat-slide-toggle matTooltip="Toggle voice input on the patient's device." class="ml-4">Voice</mat-slide-toggle>
+        <mat-slide-toggle matTooltip="Toggle gesture input on the patient's device." class="ml-4">Gaze
+        </mat-slide-toggle>
+    </section>
+    <!-- FALL DETECTION -->
+    <section>
+        <p><b>Fall Detection:</b></p>
+        <mat-slide-toggle>Enabled</mat-slide-toggle>
+    </section><!-- ROOM DETECITON -->
+    <section>
+        <p><b>Room Detection:</b></p>
+        <mat-slide-toggle>Enabled</mat-slide-toggle>
+    </section><!-- CONFUSION DETECITON -->
+    <section>
+        <p><b>Confusion Detection:</b></p>
+        <mat-slide-toggle>Enabled</mat-slide-toggle>
+    </section><!-- CONFUSION DETECITON -->
+    <section>
+        <p><b>Sticky Notes:</b></p>
+        <mat-slide-toggle>Enabled</mat-slide-toggle>
+    </section>
+</div>

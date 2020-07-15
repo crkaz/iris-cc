@@ -1,0 +1,58 @@
+<form [formGroup]="formFields" style="max-width: 400px;" class="mx-auto">
+    <!-- START TIME/DATE FIELD -->
+    <mat-form-field class="d-block">
+        <input matInput type="datetime-local" placeholder="Start" formControlName="startTimePicker" />
+    </mat-form-field>
+
+    <!-- END TIME/DATE FIELD -->
+    <mat-form-field class="d-block">
+        <input matInput type="datetime-local" placeholder="End" formControlName="endTimePicker" />
+    </mat-form-field>
+
+    <!-- REPEAT APPT FIELD -->
+    <mat-form-field class="d-block">
+        <mat-label>Repeat</mat-label>
+        <mat-select formControlName="repeatSelect">
+            <!-- [(value)]="carer.role"> -->
+            <mat-option value="never">Never</mat-option>
+            <mat-option value="daily">Daily</mat-option>
+            <mat-option value="weekly">Weekly</mat-option>
+            <mat-option value="monthly">Monthly</mat-option>
+            <mat-option value="yearly">Yearly</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- DESCRIPTION FIELD -->
+    <mat-form-field class="d-block">
+        <textarea matInput placeholder="Description" formControlName="descriptionTextArea"></textarea>
+    </mat-form-field>
+
+    <!-- REMINDERS -->
+    <mat-form-field class="d-block" matTooltipPosition="above" matTooltip="Pre-warn patients some hours and minutes before the actual event.">
+        <mat-label>Reminders<mat-icon class="ml-2">
+                info</mat-icon>
+        </mat-label>
+        <button mat-raised-button color="primary" class="w-100 hide-routerlink ml-3" matSuffix
+            (click)="AddReminder()">ADD
+            REMINDER</button>
+        <input matInput type="time" formControlName="remindersTimePicker"/>
+    </mat-form-field>
+    <mat-chip-list #chipList>
+        <mat-chip *ngFor="let reminder of reminders" [selectable]="true" [removable]="true"
+            (removed)="RemoveReminder(reminder)">
+            <span class="small">{{reminder}}</span>
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+
+    <!-- BUTTONS -->
+    <!-- <div class="row pt-4">
+        <button mat-button color="primary" type="submit" class="hide-routerlink col-5" [disabled]="!formFields.valid">
+            CANCEL
+        </button>
+        <div class=col-2></div>
+        <button mat-button color="primary" type="submit" class="hide-routerlink col-5" [disabled]="!formFields.valid">
+            CREATE
+        </button>
+    </div> -->
+</form>

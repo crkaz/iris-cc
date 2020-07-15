@@ -1,0 +1,20 @@
+<mat-card class="h-100 w-100 mt-4">
+    <mat-card-title style="text-align: left;">Delete a Patient</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="mt-4">
+        <form [formGroup]="formFields">
+            <mat-card style="text-align: left;">
+                <!-- PATIENT ID FIELD -->
+                <p>Enter the patient's id (6-digit number) and then click 'confirm delete'.</p>
+                <mat-form-field>
+                    <input matInput placeholder="Patient ID" maxlength="6" formControlName="fPatId" />
+                </mat-form-field>
+
+                <!-- CONFIRM BUTTON -->
+                <button mat-button class="hide-routerlink" [disabled]="!formFields.valid" (click)="OpenConfirmDialog()">
+                    CONFIRM DELETE
+                </button>
+            </mat-card>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,19 @@
+<button mat-button routerLink="/patient/{{patient.Id}}" class="clickable w-100 h-100 centre hide-routerlink">
+    <!-- PATIENT ID -->
+    <div id="patientId">
+        id#{{patient.Id}}
+    </div>
+    <div class="centre w-100 px-4">
+        <!-- ACTION/TITLE -->
+        <hr>
+        <h5>{{patient.LastActivity}}</h5>
+        <hr>
+        <!-- META INFO -->
+        <div style="text-align: left;">
+            <b>When: </b><span>{{patient.When}}</span>
+        </div>
+        <div style="text-align: left;">
+            <b>Where: </b><span>{{patient.Where}}</span>
+        </div>
+    </div>
+</button>

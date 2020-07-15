@@ -1,0 +1,21 @@
+<h5>Message Patient</h5>
+<div style="text-align: left;" class="mat-scroll px-2 pb-4" [style.height.px]="SectionHeight"
+    (window:resize)="onResize($event)">
+    <form [formGroup]="formFields" style="max-width: 400px; margin: 0 auto;">
+        <!-- MESSAGE TITLE FIELD -->
+        <mat-form-field class="d-block">
+            <input matInput placeholder="Title" formControlName="fTitle" />
+        </mat-form-field>
+
+        <!-- MESSAGE CONTENT FIELD -->
+        <mat-form-field class="d-block">
+            <textarea matInput placeholder="Message" formControlName="fMessage"></textarea>
+        </mat-form-field>
+
+        <!-- SEND BUTTON -->
+        <button mat-raised-button color="primary" type="submit" class="hide-routerlink w-100"
+            [disabled]="!formFields.valid">
+            SEND
+        </button>
+    </form>
+</div>

@@ -1,0 +1,12 @@
+* {
+    color: white;
+    text-align: center;
+}
+
+#patientId {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+}

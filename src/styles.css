@@ -1,0 +1,171 @@
+/* Adds bootstrap styles. */
+
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+/* Custom fonts. */
+
+@font-face {
+  font-family: GEInspiraRegular;
+  src: url('/assets/fonts/ge-inspira-reg.ttf');
+}
+
+/* Remove content padding on smaller layouts */
+@media only screen and (max-width: 500px) {
+  #content {
+    padding: 10px !important;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #eaeaea;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+#header-logo {
+  max-height: 50px;
+}
+
+#header-title {
+  font-family: 'GEInspiraRegular';
+  font-size: 2rem;
+  color: white;
+  padding-left: 15px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+#nav-menu {
+  z-index: 1000;
+  position: absolute;
+  top: 64px;
+  right: 17px;
+  border-radius: 3px;
+}
+
+.nav-item {
+  background-color: #212121;
+  color: white;
+  border-top: #fff solid 0.5px;
+  list-style: none;
+}
+.nav-item:hover {
+  background-color: white;
+  color: black;
+}
+
+#content {
+  /* max-width: 11in; */
+  text-align: center;
+}
+
+#header-slogan {
+  padding-left: 15px;
+  font-size: 0.6rem;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Material angular snackbar styling. */
+
+.success-toast {
+  color: #fff;
+  background-color: #4bb543;
+}
+
+.error-toast {
+  color: #fff;
+  background-color: #d8000c;
+}
+
+.mat-simple-snackbar {
+  color: white;
+}
+
+.mat-simple-snackbar-action {
+  color: #fff;
+}
+
+/* Misc */
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.centre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.centre-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide-routerlink:focus {
+  outline: none;
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: left;
+}
+
+/* Customise container scrollbars. */
+.mat-scroll {
+  overflow-y: scroll;
+}
+
+/* width */
+.mat-scroll::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
+  width: 5px;
+}
+
+/* Track */
+.mat-scroll::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3); */
+  border-radius: 10px;
+}
+
+/* Handle */
+.mat-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.mat-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Can't hide paginator routerlink border using hide-routerlink. */
+.mat-paginator-navigation-next:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+.mat-paginator-navigation-previous:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+.mat-row.tableRowHovered {
+    background:rgb(94, 175, 255) !important;
+}
