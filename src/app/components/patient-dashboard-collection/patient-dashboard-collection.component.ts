@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Patient } from '../../shared/models/patient';
+import { IPatient } from 'src/app/shared/models/IPatient';
 
 @Component({
   selector: 'app-patient-dashboard-collection',
@@ -9,7 +9,7 @@ import { Patient } from '../../shared/models/patient';
 export class PatientDashboardCollectionComponent implements OnInit {
   @Input() title: string;
   @Input() colour: string;
-  @Input() patients: Patient[];
+  @Input() patients: IPatient[];
 
   public colSize: number;
 

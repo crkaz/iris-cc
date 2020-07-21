@@ -1,27 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  AfterViewChecked,
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { IrisService } from "src/app/shared/services/iris/iris.service";
+import {
+  IPatientInfo,
+  AgeRange,
+  Severity,
+} from "src/app/shared/models/IPatientInfo";
 
 @Component({
-  selector: 'app-patient-info',
-  templateUrl: './patient-info.component.html',
-  styleUrls: ['./patient-info.component.css']
+  selector: "app-patient-info",
+  templateUrl: "./patient-info.component.html",
+  styleUrls: ["./patient-info.component.css"],
 })
 export class PatientInfoComponent implements OnInit {
-  public patientId: string;
-  public patientAge: string;
-  public patientDiagnosis: string;
-  public patientNotes: string;
-  public editing: boolean;
+  public patient: IPatientInfo = { Id: "", Age: "", Diagnosis: "", Notes: "" };
 
-  constructor(
-    private currentUri: ActivatedRoute) { }
+  constructor(private currentUri: ActivatedRoute, private iris: IrisService) {}
 
   ngOnInit() {
-    this.patientId = this.currentUri.snapshot.paramMap.get('id');  // Get patient id from URI.
+    const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
 
-    this.patientAge = "60-65";
-    this.patientDiagnosis = "Non-AD MCI (SEVERE)";
-    this.patientNotes = "Has trouble remembering to pay their bills."
+    // Get patient infor from iris-serer.
+    this.iris.GetPatientInfo(patientId).subscribe(
+      (data: IPatientInfo) =>
+        (this.patient = {
+          Id: patientId,
+          Age: AgeRange[data["age"]],
+          Diagnosis: Severity[data["diagnosis"]],
+          Notes: data["notes"],
+        })
+    );
   }
-
 }

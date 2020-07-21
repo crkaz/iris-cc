@@ -1,19 +1,19 @@
-<button mat-button routerLink="/patient/{{patient.Id}}" class="clickable w-100 h-100 centre hide-routerlink">
+<button mat-button routerLink="/patient/{{patient.id}}" class="clickable w-100 h-100 centre hide-routerlink">
     <!-- PATIENT ID -->
     <div id="patientId">
-        id#{{patient.Id}}
+        id#{{patient.id}}
     </div>
     <div class="centre w-100 px-4">
         <!-- ACTION/TITLE -->
         <hr>
-        <h5>{{patient.LastActivity}}</h5>
+        <h5>{{patient.activity}}</h5>
         <hr>
         <!-- META INFO -->
         <div style="text-align: left;">
-            <b>When: </b><span>{{patient.When}}</span>
+            <b>When: </b><span>{{patient.when | date : 'short'}}</span>
         </div>
         <div style="text-align: left;">
-            <b>Where: </b><span>{{patient.Where}}</span>
+            <b>Where: </b><span>{{patient.where}}</span>
         </div>
     </div>
 </button>
