@@ -1,12 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatGridList } from '@angular/material/grid-list';
-import { UtilsService } from 'src/app/shared/services/utils/utils.service';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatGridList } from "@angular/material/grid-list";
+import { UtilsService } from "src/app/shared/services/utils/utils.service";
+import { IrisService } from "src/app/shared/services/iris/iris.service";
+import { ActivatedRoute } from "@angular/router";
+import { IMessage } from "../../shared/models/IMessage";
+import { catchError, retry } from "rxjs/operators";
+import { ToastService } from "src/app/shared/services/toast/toast.service";
+import { pipe } from "rxjs";
+import { CdkMonitorFocus } from "@angular/cdk/a11y";
 
 @Component({
-  selector: 'app-messaging-panel',
-  templateUrl: './messaging-panel.component.html',
-  styleUrls: ['./messaging-panel.component.css']
+  selector: "app-messaging-panel",
+  templateUrl: "./messaging-panel.component.html",
+  styleUrls: ["./messaging-panel.component.css"],
 })
 export class MessagingPanelComponent implements OnInit {
   public formFields: FormGroup;
@@ -15,10 +22,17 @@ export class MessagingPanelComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private utils: UtilsService) { }
+    private utils: UtilsService,
+    private iris: IrisService,
+    private currentUri: ActivatedRoute
+  ) {}
 
-  get SectionHeight(): number { return this.sectionHeight; }
-  set SectionHeight(value: number) { this.sectionHeight = value; }
+  get SectionHeight(): number {
+    return this.sectionHeight;
+  }
+  set SectionHeight(value: number) {
+    this.sectionHeight = value;
+  }
 
   async ngOnInit() {
     this.InitForm();
@@ -33,15 +47,24 @@ export class MessagingPanelComponent implements OnInit {
   // Fit content with.
   SetSectionHeight() {
     // @ts-ignore
-    let toggleButtonsHeight = this.toggleButtons._element.nativeElement.offsetHeight;
+    let toggleButtonsHeight = this.toggleButtons._element.nativeElement
+      .offsetHeight;
     this.sectionHeight = 380 - toggleButtonsHeight;
   }
 
   InitForm() {
     this.formFields = this.formBuilder.group({
       fTitle: ["", [Validators.required]],
-      fMessage: ["", Validators.required]
+      fMessage: ["", Validators.required],
     });
   }
 
+  public SendMessage() {
+    const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
+    const requestBody: IMessage = {
+      Title: this.formFields.get("fTitle").value,
+      Message: this.formFields.get("fMessage").value,
+    };
+    this.iris.SendPatientMessage(patientId, requestBody).subscribe();
+  }
 }

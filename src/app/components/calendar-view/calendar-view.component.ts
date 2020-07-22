@@ -1,27 +1,44 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
+import { ICalendarEntry } from "../../shared/models/ICalendarEntry";
+import { IrisService } from "src/app/shared/services/iris/iris.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-calendar-view',
-  templateUrl: './calendar-view.component.html',
-  styleUrls: ['./calendar-view.component.css']
+  selector: "app-calendar-view",
+  templateUrl: "./calendar-view.component.html",
+  styleUrls: ["./calendar-view.component.css"],
 })
 export class CalendarViewComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'time', 'description', 'tools'];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+  displayedColumns: string[] = ["date", "time", "description", "tools"];
+  dataSource: MatTableDataSource<ICalendarEntry>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(private currentUri: ActivatedRoute, private iris: IrisService) {}
 
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+  async ngOnInit() {
+    await this.LoadCalendarEntries();
+  }
+
+  onPaginateChange(pagination) {
+    this.LoadCalendarEntries(pagination.pageIndex, pagination.pageSize);
+  }
+
+  private async LoadCalendarEntries(
+    pageIndex: string = "0",
+    pageSize: string = "5"
+  ) {
+    const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
+    pageIndex = (parseInt(pageIndex) + 1).toString();
+
+    this.iris
+      .GetPatientCalendar(patientId, pageIndex, pageSize)
+      .subscribe((data: ICalendarEntry[]) => {
+        data.sort((a, b) => (a.Start > b.Start ? 1 : -1)); // Sort ascending (soonest events first).
+        this.dataSource = new MatTableDataSource<ICalendarEntry>(data);
+        this.dataSource.paginator = this.paginator;
+      });
   }
 }
-
-const ELEMENT_DATA: any [] = [
-  { dateTime: "7/23/2020, 11:23:42 PM", description: "Take medication" },
-  { dateTime: "7/23/2020, 11:23:42 PM", description: "Doctors appointment" },
-  { dateTime: "7/23/2020, 11:23:42 PM", description: "Your Birthday" },
-];

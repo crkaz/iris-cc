@@ -14,7 +14,7 @@
 
         <!-- SEND BUTTON -->
         <button mat-raised-button color="primary" type="submit" class="hide-routerlink w-100"
-            [disabled]="!formFields.valid">
+            [disabled]="!formFields.valid" (click)=SendMessage()>
             SEND
         </button>
     </form>
