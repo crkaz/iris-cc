@@ -24,15 +24,14 @@ export class PatientActivityLogsComponent implements OnInit {
   }
 
   onPaginateChange(pagination) {
-    this.LoadActivityLogs(pagination.pageIndex, pagination.pageSize);
+    this.LoadActivityLogs("all", pagination.pageSize);
   }
 
   private async LoadActivityLogs(
-    pageIndex: string = "0",
+    pageIndex: string = "all",
     pageSize: string = "4"
   ) {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
-    pageIndex = (parseInt(pageIndex) + 1).toString();
 
     this.iris
       .GetPatientActivityLogs(patientId, pageIndex, pageSize)

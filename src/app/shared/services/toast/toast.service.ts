@@ -2,10 +2,10 @@ import { Injectable, NgZone } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ToastService {
-  constructor(public snackbar: MatSnackBar, private ngZone: NgZone) { }
+  constructor(public snackbar: MatSnackBar, private ngZone: NgZone) {}
 
   // GREEB bg - SUCCESS notification.
   Success(message = "Success!", duration = 2000, button = "x") {
@@ -24,8 +24,18 @@ export class ToastService {
         duration: duration,
         panelClass: [type],
         horizontalPosition: "center",
-        verticalPosition: "top"
+        verticalPosition: "bottom",
       });
     });
+  }
+
+  public HandleResponse(response: any, successCriteria: string): boolean {
+    if (response == successCriteria) {
+      this.Success(response);
+      return true;
+    } else {
+      this.Error(response);
+      return false;
+    }
   }
 }

@@ -5,10 +5,7 @@ import { UtilsService } from "src/app/shared/services/utils/utils.service";
 import { IrisService } from "src/app/shared/services/iris/iris.service";
 import { ActivatedRoute } from "@angular/router";
 import { IMessage } from "../../shared/models/IMessage";
-import { catchError, retry } from "rxjs/operators";
 import { ToastService } from "src/app/shared/services/toast/toast.service";
-import { pipe } from "rxjs";
-import { CdkMonitorFocus } from "@angular/cdk/a11y";
 
 @Component({
   selector: "app-messaging-panel",
@@ -17,6 +14,7 @@ import { CdkMonitorFocus } from "@angular/cdk/a11y";
 })
 export class MessagingPanelComponent implements OnInit {
   public formFields: FormGroup;
+  public messageSent: boolean = false;
   @Input() toggleButtons: MatGridList;
   private sectionHeight: number;
 
@@ -24,7 +22,8 @@ export class MessagingPanelComponent implements OnInit {
     private formBuilder: FormBuilder,
     private utils: UtilsService,
     private iris: IrisService,
-    private currentUri: ActivatedRoute
+    private currentUri: ActivatedRoute,
+    private toast: ToastService
   ) {}
 
   get SectionHeight(): number {
@@ -52,19 +51,27 @@ export class MessagingPanelComponent implements OnInit {
     this.sectionHeight = 380 - toggleButtonsHeight;
   }
 
-  InitForm() {
+  InitForm(): void {
     this.formFields = this.formBuilder.group({
       fTitle: ["", [Validators.required]],
       fMessage: ["", Validators.required],
     });
   }
 
-  public SendMessage() {
+  public SendMessage(): void {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
     const requestBody: IMessage = {
       Title: this.formFields.get("fTitle").value,
       Message: this.formFields.get("fMessage").value,
     };
-    this.iris.SendPatientMessage(patientId, requestBody).subscribe();
+    this.iris
+      .SendPatientMessage(patientId, requestBody)
+      .subscribe(
+        (r) =>
+          (this.messageSent = this.toast.HandleResponse(
+            r,
+            "Message sent successfully."
+          ))
+      );
   }
 }

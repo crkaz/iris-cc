@@ -1,15 +1,9 @@
 import { Injectable } from "@angular/core";
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  HttpErrorResponse,
-} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, throwError, interval, Subject, observable } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import { IPatientInfo } from "../../models/IPatientInfo";
 import { IPatient } from "../../models/IPatient";
-import { ToastService } from "../toast/toast.service";
 import { ICalendarEntry } from "../../models/ICalendarEntry";
 import { IActivityLog } from "../../models/IActivityLog";
 import { IMessage } from "../../models/IMessage";
@@ -36,22 +30,7 @@ export class IrisService {
   // }
   //#endregion
 
-  constructor(private http: HttpClient, private toast: ToastService) {}
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error("An error occurred:", error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      );
-    }
-    // Return an observable with a user-facing error message.
-    return throwError("Something bad happened; please try again later.");
-  }
+  constructor(private http: HttpClient) {}
 
   private GetPatientId() {}
 
@@ -108,7 +87,7 @@ export class IrisService {
     return response;
   }
 
-  public SendPatientMessage(patientId: string, body: any) {
+  public SendPatientMessage(patientId: string, body: IMessage) {
     const endpoint: string = BASE_URL + "message/post/";
     const options = {
       headers: new HttpHeaders({
@@ -116,10 +95,25 @@ export class IrisService {
         "Content-Type": "application/json",
       }),
       params: new HttpParams().set("id", patientId),
-      responseType: 'text' as const,
+      responseType: "text" as "json",
     };
 
     const response = this.http.post<IMessage>(endpoint, body, options);
+    return response;
+  }
+
+  public UpdatePatientNotes(patientId: string, body: any) {
+    const endpoint: string = BASE_URL + "patientinfo/put/";
+    const options = {
+      headers: new HttpHeaders({
+        ApiKey: CARER_API_KEY,
+        "Content-Type": "application/json",
+      }),
+      params: new HttpParams().set("id", patientId),
+      responseType: "text" as "json",
+    };
+
+    const response = this.http.put(endpoint, body, options);
     return response;
   }
 }

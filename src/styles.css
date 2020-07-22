@@ -1,12 +1,12 @@
 /* Adds bootstrap styles. */
 
-@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 /* Custom fonts. */
 
 @font-face {
   font-family: GEInspiraRegular;
-  src: url('/assets/fonts/ge-inspira-reg.ttf');
+  src: url("/assets/fonts/ge-inspira-reg.ttf");
 }
 
 /* Remove content padding on smaller layouts */
@@ -25,7 +25,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 #header-logo {
@@ -33,7 +33,7 @@ body {
 }
 
 #header-title {
-  font-family: 'GEInspiraRegular';
+  font-family: "GEInspiraRegular";
   font-size: 2rem;
   color: white;
   padding-left: 15px;
@@ -76,12 +76,12 @@ body {
 
 .success-toast {
   color: #fff;
-  background-color: #4bb543;
+  background-color: #4bb543 !important;
 }
 
 .error-toast {
   color: #fff;
-  background-color: #d8000c;
+  background-color: #d8000c !important;
 }
 
 .mat-simple-snackbar {
@@ -167,5 +167,5 @@ h6 {
 }
 
 .mat-row.tableRowHovered {
-    background:rgb(94, 175, 255) !important;
+  background: rgb(94, 175, 255) !important;
 }

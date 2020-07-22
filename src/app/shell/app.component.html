@@ -22,7 +22,8 @@
             <ul class="small">
                 <li class="nav-item" routerLink="/admin" (click)="ToggleMenu()">
                     <button mat-button class="w-100 pl-2 pr-2">Admin Panel</button></li>
-                <li class="nav-item" (click)="ToggleMenu()"><button mat-button class="w-100 pl-2 pr-2">Change
+                <li class="nav-item" (click)="ToggleMenu(); SendPasswordReset();"><button mat-button
+                        class="w-100 pl-2 pr-2">Change
                         Password</button></li>
                 <li class="nav-item" (click)="ToggleMenu()"><button mat-button class="w-100 pl-2 pr-2">Sign
                         Out</button></li>

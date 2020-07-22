@@ -23,15 +23,14 @@ export class CalendarViewComponent implements OnInit {
   }
 
   onPaginateChange(pagination) {
-    this.LoadCalendarEntries(pagination.pageIndex, pagination.pageSize);
+    this.LoadCalendarEntries("all", pagination.pageSize);
   }
 
   private async LoadCalendarEntries(
-    pageIndex: string = "0",
+    pageIndex: string = "all",
     pageSize: string = "5"
   ) {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
-    pageIndex = (parseInt(pageIndex) + 1).toString();
 
     this.iris
       .GetPatientCalendar(patientId, pageIndex, pageSize)

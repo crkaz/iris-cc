@@ -2,32 +2,57 @@
     <mat-card-title style="text-align: left;">Patient Information</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content class="mt-4" style="text-align: left;">
-        <!-- ID -->
-        <p>
-            <span><b>Id: </b></span>
-            <span>#{{patient.Id}}</span>
-        </p>
+        <form [formGroup]="formFields">
+            <p>
+                <span><b>Id: </b></span>
+                <span>#{{patient.Id}}</span>
+            </p>
 
-        <!-- AGE -->
-        <p>
-            <span><b>Age: </b></span>
-            <span>{{patient.Age}}</span>
-        </p>
+            <!-- AGE -->
+            <p *ngIf="!editing">
+                <span><b>Age: </b></span>
+                <span>{{Age}}</span>
+            </p>
+            <mat-form-field class="d-block" *ngIf="editing" style="max-width:60%">
+                <mat-label>Age</mat-label>
+                <mat-select  formControlName="fAge">
+                    <mat-option *ngFor="let range of ageRangeEnum;let i = index" [value]="i">
+                        {{range}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <!-- DIAGNOSIS -->
-        <p>
-            <span><b>Diagnosis: </b></span>
-            <span>{{patient.Diagnosis}}</span>
-        </p>
+            <!-- DIAGNOSIS -->
+            <p *ngIf="!editing">
+                <span><b>Diagnosis: </b></span>
+                <span>{{Diagnosis}}</span>
+            </p>
+            <mat-form-field class="d-block" *ngIf="editing" style="max-width:60%">
+                <mat-label>Diagnosis</mat-label>
+                <mat-select formControlName="fDiagnosis">
+                    <mat-option *ngFor="let severity of diagnosisEnum;let i = index" [value]="i">
+                        {{severity}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <!-- NOTES -->
-        <p>
-            <span><b>Notes: </b></span>
-            <span>{{patient.Notes}}</span>
-        </p>
+            <!-- NOTES -->
+            <p *ngIf="!editing">
+                <span><b>Notes: </b></span>
+                <span>{{patient.Notes}}</span>
+            </p>
+            <mat-form-field class="d-block" *ngIf="editing" style="max-width:60%">
+                <input matInput placeholder="Notes" formControlName="fNotes" />
+            </mat-form-field>
 
-        <!-- EDIT BUTTON -->
-        <button mat-button style="position:absolute; bottom: 10px; right: 10px;"
-            class="hide-routerlink pl-4 pr-4">EDIT</button>
+            <!-- EDIT BUTTON -->
+            <div style="position:absolute; bottom: 10px; right: 10px;">
+                <button mat-button class="hide-routerlink pl-4 pr-4" (click)="editing = !editing"
+                    *ngIf="editing">CANCEL</button>
+                <button mat-button class="hide-routerlink pl-4 pr-4" type="submit"
+                    (click)="Edit()">{{editing ? 'SAVE' : 'EDIT'}}</button>
+            </div>
+        </form>
+
     </mat-card-content>
 </mat-card>

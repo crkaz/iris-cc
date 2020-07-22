@@ -1,33 +1,23 @@
-import { Injectable } from '@angular/core';
-
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UtilsService {
-  constructor() { }
+  constructor() {}
 
-  public readonly USER_COOKIE = "IRIS_CC_USER"; //@TODO: Change to a token.
+  // public readonly USER_COOKIE = "IRIS_CC_USER"; //@TODO: Change to a token.
   public readonly LOGIN_PAGE = "login";
   public readonly LANDING_PAGE = "dashboard";
 
-  public readonly USER_COLLECTION = {
-    attention: {
-      collectionTitle: "Attention Required",
-      cardColour: "#ff2b2b80"
-    },
-    online: {
-      collectionTitle: "Online",
-      cardColour: "#673ab780"
-    },
-    offline: {
-      collectionTitle: "Offline",
-      cardColour: "#b3b3b380"
-    }
-  }
-
   /** Delay for a number milliseconds. */
   public Delay(ms: number) {
-    return new Promise(_ => setTimeout(_, ms));
+    return new Promise((_) => setTimeout(_, ms));
+  }
+
+  EnumToArray(e) {
+    return Object.keys(e)
+      .filter((value) => isNaN(Number(value)) === false)
+      .map((key) => e[key]);
   }
 }

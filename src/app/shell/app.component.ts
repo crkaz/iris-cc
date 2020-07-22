@@ -24,7 +24,7 @@ export class AppComponent {
 
   constructor(
     public authService: AuthenticationService,
-    public toastService: ToastService,
+    private toast: ToastService,
     public router: Router,
   ) { }
 
@@ -42,5 +42,12 @@ export class AppComponent {
 
   LogOut() {
     this.authService.LogOut();
+  }
+
+  SendPasswordReset(){
+    // TODO: implement firabse auth method.
+    this.toast.Success(
+      "A link to reset your password has just been sent to your registered email address."
+    );
   }
 }

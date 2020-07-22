@@ -3,7 +3,7 @@ export enum Severity { "Mild MCI (non-AD)", "Moderate MCI (non-AD)", "Severe MCI
 
 export interface IPatientInfo {
     Id: string;
-    Age: string;
-    Diagnosis: string;
+    Age: AgeRange;
+    Diagnosis: Severity;
     Notes: string;
 }
