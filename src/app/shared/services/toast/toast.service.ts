@@ -8,13 +8,15 @@ export class ToastService {
   constructor(public snackbar: MatSnackBar, private ngZone: NgZone) {}
 
   // GREEB bg - SUCCESS notification.
-  Success(message = "Success!", duration = 2000, button = "x") {
+  Success(message = "Success!", duration = 2000, button = "x") :boolean{
     this.Open(message, duration, button, "success-toast");
+    return true;
   }
 
   // RED bg - ERROR notification.
-  Error(message = "Error!", duration = 2000, button = "x") {
+  Error(message = "Error!", duration = 2000, button = "x") :boolean{
     this.Open(message, duration, button, "error-toast");
+    return false;
   }
 
   // BLACK bg - NEUTRAL notification.
@@ -27,15 +29,5 @@ export class ToastService {
         verticalPosition: "bottom",
       });
     });
-  }
-
-  public HandleResponse(response: any, successCriteria: string): boolean {
-    if (response == successCriteria) {
-      this.Success(response);
-      return true;
-    } else {
-      this.Error(response);
-      return false;
-    }
   }
 }

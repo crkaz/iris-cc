@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { IActivityLog } from "../../shared/models/IActivityLog";
 import { IrisService } from "src/app/shared/services/iris/iris.service";
 import { ActivatedRoute } from "@angular/router";
+import { ToastService } from "src/app/shared/services/toast/toast.service";
 
 @Component({
   selector: "app-patient-activity-logs",
@@ -14,10 +15,15 @@ export class PatientActivityLogsComponent implements OnInit {
   displayedColumns: string[] = ["date", "time", "activity"];
   dataSource: MatTableDataSource<IActivityLog>;
   moreInfo: string;
+  entriesExist: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private currentUri: ActivatedRoute, private iris: IrisService) {}
+  constructor(
+    private currentUri: ActivatedRoute,
+    private iris: IrisService,
+    private toast: ToastService
+  ) {}
 
   async ngOnInit() {
     await this.LoadActivityLogs();
@@ -36,10 +42,16 @@ export class PatientActivityLogsComponent implements OnInit {
     this.iris
       .GetPatientActivityLogs(patientId, pageIndex, pageSize)
       .subscribe((data: IActivityLog[]) => {
+        if (data.length > 0) {
+          this.entriesExist = true;
+        } else {
+          this.entriesExist = false;
+        }
         data.sort((a, b) => (a.DateTime > b.DateTime ? -1 : 1)); // Sort ascending.
         this.dataSource = new MatTableDataSource<IActivityLog>(data);
         this.dataSource.paginator = this.paginator;
-      });
+      }),
+      (error) => this.toast.Error(error.error);
   }
 
   public SelectLog(element: IActivityLog): void {

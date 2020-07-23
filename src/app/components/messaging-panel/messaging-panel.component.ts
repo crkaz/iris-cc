@@ -64,14 +64,15 @@ export class MessagingPanelComponent implements OnInit {
       Title: this.formFields.get("fTitle").value,
       Message: this.formFields.get("fMessage").value,
     };
-    this.iris
-      .SendPatientMessage(patientId, requestBody)
-      .subscribe(
-        (r) =>
-          (this.messageSent = this.toast.HandleResponse(
-            r,
-            "Message sent successfully."
-          ))
-      );
+    this.iris.PostPatientMessage(patientId, requestBody).subscribe(
+      (r) => {
+        this.toast.Success("Message sent successfully.");
+        this.messageSent = true;
+      },
+      (error) => {
+        this.toast.Error(error.error);
+        this.messageSent = false;
+      }
+    );
   }
 }

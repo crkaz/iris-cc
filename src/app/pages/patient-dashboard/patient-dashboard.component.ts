@@ -3,6 +3,7 @@ import { IrisService } from "src/app/shared/services/iris/iris.service";
 import { IPatient } from "../../shared/models/IPatient";
 import { Observable, interval, timer } from "rxjs";
 import { PlotLineOrBand } from "highcharts";
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 const POLLING_RATE: number = 3000;
 
@@ -18,7 +19,7 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
   private timer;
   private subscriber;
 
-  constructor(private iris: IrisService) {}
+  constructor(private iris: IrisService, private toast: ToastService) {}
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
@@ -48,7 +49,8 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
               this.offlinePatients.push(patient);
               break;
           }
-        });
+        }),
+          (error) => this.toast.Error(error.error);
       });
     });
   }

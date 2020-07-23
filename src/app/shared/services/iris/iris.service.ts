@@ -7,9 +7,10 @@ import { IPatient } from "../../models/IPatient";
 import { ICalendarEntry } from "../../models/ICalendarEntry";
 import { IActivityLog } from "../../models/IActivityLog";
 import { IMessage } from "../../models/IMessage";
+import { ICarer } from "../../models/ICarer";
 
 const BASE_URL = "http://localhost:54268/api/";
-const CARER_API_KEY = "testcarer1";
+const CARER_API_KEY = "testcarer";
 
 export interface Message {
   author: string;
@@ -32,16 +33,13 @@ export class IrisService {
 
   constructor(private http: HttpClient) {}
 
-  private GetPatientId() {}
-
   public GetPatients() {
     const endpoint: string = BASE_URL + "carer/patients/";
     const options = {
       headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
     };
 
-    const response = this.http.get<IPatient[]>(endpoint, options);
-    return response;
+    return this.http.get<IPatient[]>(endpoint, options);
   }
 
   public GetPatientInfo(patientId: string) {
@@ -51,8 +49,7 @@ export class IrisService {
       params: new HttpParams().set("id", patientId),
     };
 
-    const response = this.http.get<IPatientInfo>(endpoint, options);
-    return response;
+    return this.http.get<IPatientInfo>(endpoint, options);
   }
 
   public GetPatientCalendar(patientId: string, pageN: string, nItems: string) {
@@ -65,8 +62,7 @@ export class IrisService {
         .set("nitems", nItems),
     };
 
-    const response = this.http.get<ICalendarEntry[]>(endpoint, options);
-    return response;
+    return this.http.get<ICalendarEntry[]>(endpoint, options);
   }
 
   public GetPatientActivityLogs(
@@ -83,11 +79,10 @@ export class IrisService {
         .set("nitems", nItems),
     };
 
-    const response = this.http.get<IActivityLog[]>(endpoint, options);
-    return response;
+    return this.http.get<IActivityLog[]>(endpoint, options);
   }
 
-  public SendPatientMessage(patientId: string, body: IMessage) {
+  public PostPatientMessage(patientId: string, body: IMessage) {
     const endpoint: string = BASE_URL + "message/post/";
     const options = {
       headers: new HttpHeaders({
@@ -98,11 +93,10 @@ export class IrisService {
       responseType: "text" as "json",
     };
 
-    const response = this.http.post<IMessage>(endpoint, body, options);
-    return response;
+    return this.http.post<IMessage>(endpoint, body, options);
   }
 
-  public UpdatePatientNotes(patientId: string, body: any) {
+  public PutPatientNotes(patientId: string, body: any) {
     const endpoint: string = BASE_URL + "patientinfo/put/";
     const options = {
       headers: new HttpHeaders({
@@ -113,7 +107,57 @@ export class IrisService {
       responseType: "text" as "json",
     };
 
-    const response = this.http.put(endpoint, body, options);
-    return response;
+    return this.http.put(endpoint, body, options);
   }
+
+  public DeletePatient(patientId: string) {
+    const endpoint: string = BASE_URL + "patient/delete/";
+    const options = {
+      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+      params: new HttpParams().set("id", patientId),
+      responseType: "text" as "json",
+    };
+
+    return this.http.delete(endpoint, options);
+  }
+
+  public GetCarers() {
+    const endpoint: string = BASE_URL + "carer/get/";
+    const options = {
+      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+    };
+
+    return this.http.get<any[]>(endpoint, options);
+  }
+
+  public AllocatePatient(body: any) {
+    const endpoint: string = BASE_URL + "carer/allocate/";
+    const options = {
+      headers: new HttpHeaders({
+        ApiKey: CARER_API_KEY,
+        "Content-Type": "application/json",
+      }),
+      responseType: "text" as "json",
+    };
+
+    return this.http.put(endpoint, body, options);
+  }
+
+  public PostCalendarEntry(patientId: string, body: IMessage) {
+    const endpoint: string = BASE_URL + "message/post/";
+    const options = {
+      headers: new HttpHeaders({
+        ApiKey: CARER_API_KEY,
+        "Content-Type": "application/json",
+      }),
+      params: new HttpParams().set("id", patientId),
+      responseType: "text" as "json",
+    };
+
+    return this.http.post<IMessage>(endpoint, body, options);
+  }
+
+  public PutCalendarEntry() {}
+
+  public DeleteCalendarEntry() {}
 }

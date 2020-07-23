@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ICalendarEntry } from "../../shared/models/ICalendarEntry";
 import { IrisService } from "src/app/shared/services/iris/iris.service";
 import { ActivatedRoute } from "@angular/router";
+import { ToastService } from "src/app/shared/services/toast/toast.service";
 
 @Component({
   selector: "app-calendar-view",
@@ -13,10 +14,15 @@ import { ActivatedRoute } from "@angular/router";
 export class CalendarViewComponent implements OnInit {
   displayedColumns: string[] = ["date", "time", "description", "tools"];
   dataSource: MatTableDataSource<ICalendarEntry>;
+  entriesExist: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private currentUri: ActivatedRoute, private iris: IrisService) {}
+  constructor(
+    private currentUri: ActivatedRoute,
+    private iris: IrisService,
+    private toast: ToastService
+  ) {}
 
   async ngOnInit() {
     await this.LoadCalendarEntries();
@@ -35,9 +41,15 @@ export class CalendarViewComponent implements OnInit {
     this.iris
       .GetPatientCalendar(patientId, pageIndex, pageSize)
       .subscribe((data: ICalendarEntry[]) => {
+        if (data.length > 0) {
+          this.entriesExist = true;
+        } else {
+          this.entriesExist = false;
+        }
         data.sort((a, b) => (a.Start > b.Start ? 1 : -1)); // Sort ascending (soonest events first).
         this.dataSource = new MatTableDataSource<ICalendarEntry>(data);
         this.dataSource.paginator = this.paginator;
-      });
+      }),
+      (error) => this.toast.Error(error.error);
   }
 }

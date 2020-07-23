@@ -1,4 +1,9 @@
-<table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;">
+<div *ngIf="!entriesExist" class="centre">
+    <mat-icon style="padding-left: 35px;">domain_disabled</mat-icon>
+    <p>No entries yet.</p>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;" *ngIf="entriesExist">
 
     <!-- Date -->
     <ng-container matColumnDef="date">
@@ -36,4 +41,4 @@
         (mouseover)="row.tableRowHovered = true" (mouseout)="row.tableRowHovered = false"></tr>
 </table>
 
-<mat-paginator [pageSizeOptions]="[5,10,25]" class="pb-4" (page)="onPaginateChange($event)"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5,10,25]" class="pb-4" (page)="onPaginateChange($event)" *ngIf="entriesExist"></mat-paginator>

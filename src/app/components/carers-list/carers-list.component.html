@@ -21,8 +21,8 @@
                     <mat-form-field>
                         <mat-select [(value)]="carer.role">
                             <mat-option value="admin">Admin</mat-option>
-                            <mat-option value="formal">Formal Carer</mat-option>
-                            <mat-option value="informal">Informal Carer</mat-option>
+                            <mat-option value="formalcarer">Formal Carer</mat-option>
+                            <mat-option value="informalcarer">Informal Carer</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </td>
@@ -30,7 +30,7 @@
 
             <!-- Assigned Patients -->
             <ng-container matColumnDef="assignedPatients">
-                <th mat-header-cell *matHeaderCellDef style="width: 70% !important;"> Assigned Patients </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 60% !important;"> Assigned Patients </th>
                 <td mat-cell *matCellDef="let carer">
                     <mat-form-field class="example-chip-list" class="w-100">
                         <mat-chip-list #chipList>

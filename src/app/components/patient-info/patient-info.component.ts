@@ -41,15 +41,19 @@ export class PatientInfoComponent implements OnInit {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
 
     // Get patient infor from iris-serer.
-    this.iris.GetPatientInfo(patientId).subscribe(
-      (data: IPatientInfo) =>
-        (this.patient = {
+    this.iris.GetPatientInfo(patientId).subscribe((data: IPatientInfo) => {
+      if (data) {
+        this.patient = {
           Id: patientId,
-          Age: data["age"],
-          Diagnosis: data["diagnosis"],
-          Notes: data["notes"],
-        })
-    );
+          Age: data["age"] ? data["age"] : 0,
+          Diagnosis: data["diagnosis"] ? data["diagnosis"] : 0,
+          Notes: data["notes"] ? data["notes"] : "...",
+        };
+      }
+      else{
+        this.patient.Id = patientId;
+      }
+    });
 
     this.InitForm();
   }
@@ -57,8 +61,8 @@ export class PatientInfoComponent implements OnInit {
   InitForm() {
     this.formFields = this.formBuilder.group({
       fAge: [this.patient.Age],
-      fDiagnosis: [this.patient.Diagnosis],
-      fNotes: [this.patient.Notes],
+      fDiagnosis: [this.patient.Diagnosis ? this.patient.Diagnosis : 0],
+      fNotes: [this.patient.Notes ? this.patient.Notes : "..."],
     });
   }
 
@@ -68,9 +72,10 @@ export class PatientInfoComponent implements OnInit {
       this.patient.Age = this.formFields.get("fAge").value;
       this.patient.Diagnosis = this.formFields.get("fDiagnosis").value;
       this.patient.Notes = this.formFields.get("fNotes").value;
-      this.iris
-        .UpdatePatientNotes(patientId, this.patient)
-        .subscribe((r) => this.toast.HandleResponse(r, "Updated patient successfully."));
+      this.iris.PutPatientNotes(patientId, this.patient).subscribe(
+        (r) => this.toast.Success("Updated patient successfully."),
+        (error) => this.toast.Error(error.error)
+      );
     } else {
       this.InitForm();
     }
