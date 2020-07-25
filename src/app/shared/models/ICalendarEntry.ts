@@ -1,7 +1,9 @@
+export enum Repetition { Never, Daily, Weekly, Monthly, Yearly };
+
 export interface ICalendarEntry {
   Start: Date;
   End: Date;
-  Repeat: number;
+  Repeat: Repetition;
   Description: string;
   Reminders: string[];
 }

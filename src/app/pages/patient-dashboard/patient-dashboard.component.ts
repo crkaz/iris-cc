@@ -16,6 +16,7 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
   public alertPatients: IPatient[] = [];
   public onlinePatients: IPatient[] = [];
   public offlinePatients: IPatient[] = [];
+  public connected: boolean = false;
   private timer;
   private subscriber;
 
@@ -37,6 +38,7 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
         this.alertPatients = [];
         this.onlinePatients = [];
         this.offlinePatients = [];
+        this.connected = true;
         data.forEach((patient: IPatient) => {
           switch (patient.status) {
             case "alert":

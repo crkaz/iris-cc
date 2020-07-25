@@ -11,6 +11,8 @@ import { ICarer } from "../../models/ICarer";
 
 const BASE_URL = "http://localhost:54268/api/";
 const CARER_API_KEY = "testcarer";
+const HEADERS = new HttpHeaders({ "ApiKey": CARER_API_KEY });
+
 
 export interface Message {
   author: string;
@@ -31,12 +33,12 @@ export class IrisService {
   // }
   //#endregion
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public GetPatients() {
     const endpoint: string = BASE_URL + "carer/patients/";
     const options = {
-      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+      headers: HEADERS,
     };
 
     return this.http.get<IPatient[]>(endpoint, options);
@@ -45,7 +47,7 @@ export class IrisService {
   public GetPatientInfo(patientId: string) {
     const endpoint: string = BASE_URL + "patientinfo/get/";
     const options = {
-      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+      headers: HEADERS,
       params: new HttpParams().set("id", patientId),
     };
 
@@ -55,7 +57,7 @@ export class IrisService {
   public GetPatientCalendar(patientId: string, pageN: string, nItems: string) {
     const endpoint: string = BASE_URL + "calendar/carerget/";
     const options = {
-      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+      headers: HEADERS,
       params: new HttpParams()
         .set("id", patientId)
         .set("page", pageN)
@@ -72,7 +74,7 @@ export class IrisService {
   ) {
     const endpoint: string = BASE_URL + "patient/logs/";
     const options = {
-      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+      headers: HEADERS,
       params: new HttpParams()
         .set("id", patientId)
         .set("page", pageN)
@@ -113,7 +115,7 @@ export class IrisService {
   public DeletePatient(patientId: string) {
     const endpoint: string = BASE_URL + "patient/delete/";
     const options = {
-      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
+      headers: HEADERS,
       params: new HttpParams().set("id", patientId),
       responseType: "text" as "json",
     };
@@ -123,9 +125,7 @@ export class IrisService {
 
   public GetCarers() {
     const endpoint: string = BASE_URL + "carer/get/";
-    const options = {
-      headers: new HttpHeaders({ ApiKey: CARER_API_KEY }),
-    };
+    const options = { headers: HEADERS };
 
     return this.http.get<any[]>(endpoint, options);
   }
@@ -134,7 +134,7 @@ export class IrisService {
     const endpoint: string = BASE_URL + "carer/allocate/";
     const options = {
       headers: new HttpHeaders({
-        ApiKey: CARER_API_KEY,
+        "ApiKey": CARER_API_KEY,
         "Content-Type": "application/json",
       }),
       responseType: "text" as "json",
@@ -143,8 +143,8 @@ export class IrisService {
     return this.http.put(endpoint, body, options);
   }
 
-  public PostCalendarEntry(patientId: string, body: IMessage) {
-    const endpoint: string = BASE_URL + "message/post/";
+  public PostCalendarEntry(patientId: string, body: ICalendarEntry) {
+    const endpoint: string = BASE_URL + "calendar/post/";
     const options = {
       headers: new HttpHeaders({
         ApiKey: CARER_API_KEY,
@@ -154,10 +154,10 @@ export class IrisService {
       responseType: "text" as "json",
     };
 
-    return this.http.post<IMessage>(endpoint, body, options);
+    return this.http.post<ICalendarEntry>(endpoint, body, options);
   }
 
-  public PutCalendarEntry() {}
+  public PutCalendarEntry() { }
 
-  public DeleteCalendarEntry() {}
+  public DeleteCalendarEntry() { }
 }

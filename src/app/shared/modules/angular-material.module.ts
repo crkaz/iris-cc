@@ -25,6 +25,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox'; //*
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
    imports: [
@@ -53,6 +54,7 @@ import { MatDialogModule } from '@angular/material/dialog';
       MatCheckboxModule,
       MatRadioModule,
       MatDialogModule,
+      MatProgressSpinnerModule,
    ],
    exports: [
       MatButtonModule,
@@ -79,6 +81,7 @@ import { MatDialogModule } from '@angular/material/dialog';
       MatCheckboxModule,
       MatRadioModule,
       MatDialogModule,
+      MatProgressSpinnerModule,
    ],
    providers: [
       MatDatepickerModule,

@@ -1,4 +1,13 @@
-<app-page-title pageTitle="Patient Dashboard"></app-page-title>
-<app-patient-dashboard-collection title="Needs Attention" colour="#ff5c5c" [patients]="alertPatients"></app-patient-dashboard-collection>
-<app-patient-dashboard-collection title="Online" colour="#5eafff" [patients]="onlinePatients"></app-patient-dashboard-collection>
-<app-patient-dashboard-collection title="Offline" colour="#8a8a8a" [patients]="offlinePatients"></app-patient-dashboard-collection>
+<div *ngIf="!connected">
+    <mat-spinner style="margin: 0 auto;"></mat-spinner>
+    <p class="pt-4">Loading assigned patients.</p>
+</div>
+<div *ngIf="connected">
+    <app-page-title pageTitle="Patient Dashboard"></app-page-title>
+    <app-patient-dashboard-collection title="Needs Attention" colour="#ff5c5c" [patients]="alertPatients">
+    </app-patient-dashboard-collection>
+    <app-patient-dashboard-collection title="Online" colour="#5eafff" [patients]="onlinePatients">
+    </app-patient-dashboard-collection>
+    <app-patient-dashboard-collection title="Offline" colour="#8a8a8a" [patients]="offlinePatients">
+    </app-patient-dashboard-collection>
+</div>
