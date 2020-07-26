@@ -2,7 +2,13 @@
     <mat-card-title style="text-align: left;">Registered Users</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content class="mt-4">
-        <table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;">
+        <!-- LOADER -->
+        <div *ngIf="!loaded">
+            <mat-spinner style="margin: 0 auto;"></mat-spinner>
+        </div>
+
+        <!-- LOADED CONTENT -->
+        <table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;" *ngIf="loaded">
 
             <!-- Username -->
             <ng-container matColumnDef="username">

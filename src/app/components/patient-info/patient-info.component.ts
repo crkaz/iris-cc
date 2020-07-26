@@ -28,7 +28,7 @@ export class PatientInfoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private utils: UtilsService,
     private toast: ToastService
-  ) {}
+  ) { }
 
   get Age() {
     return AgeRange[this.patient.Age];
@@ -50,7 +50,7 @@ export class PatientInfoComponent implements OnInit {
           Notes: data["notes"] ? data["notes"] : "...",
         };
       }
-      else{
+      else {
         this.patient.Id = patientId;
       }
     });
@@ -69,13 +69,16 @@ export class PatientInfoComponent implements OnInit {
   public Edit() {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
     if (this.editing) {
-      this.patient.Age = this.formFields.get("fAge").value;
-      this.patient.Diagnosis = this.formFields.get("fDiagnosis").value;
-      this.patient.Notes = this.formFields.get("fNotes").value;
-      this.iris.PutPatientNotes(patientId, this.patient).subscribe(
-        (r) => this.toast.Success("Updated patient successfully."),
-        (error) => this.toast.Error(error.error)
-      );
+      if (!this.formFields.untouched) {
+        // Only make the edit request if fields have been modified.
+        this.patient.Age = this.formFields.get("fAge").value;
+        this.patient.Diagnosis = this.formFields.get("fDiagnosis").value;
+        this.patient.Notes = this.formFields.get("fNotes").value;
+        this.iris.PutPatientNotes(patientId, this.patient).subscribe(
+          (r) => this.toast.Success("Updated patient successfully."),
+          (error) => this.toast.Error(error.error)
+        );
+      }
     } else {
       this.InitForm();
     }

@@ -1,6 +1,7 @@
 <div *ngIf="!connected">
     <mat-spinner style="margin: 0 auto;"></mat-spinner>
     <p class="pt-4">Loading assigned patients.</p>
+    <p class="text-danger" *ngIf="troubleConnecting">It looks like we're having trouble connecting...</p>
 </div>
 <div *ngIf="connected">
     <app-page-title pageTitle="Patient Dashboard"></app-page-title>

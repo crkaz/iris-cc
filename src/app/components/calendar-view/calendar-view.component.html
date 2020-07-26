@@ -1,9 +1,16 @@
-<div *ngIf="!entriesExist" class="centre" style="padding-top: 200px">
+<!-- PLACEHOLDER -->
+<div *ngIf="!entriesExist && loaded" class="centre" style="padding-top: 200px">
     <mat-icon style="padding-left: 35px;">domain_disabled</mat-icon>
     <p>No entries yet.</p>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;" *ngIf="entriesExist">
+<!-- LOADER -->
+<div *ngIf="!loaded">
+    <mat-spinner style="margin: 0 auto;"></mat-spinner>
+</div>
+
+<!-- LOADED CONTENT  -->
+<table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;" *ngIf="entriesExist && loaded">
 
     <!-- Date -->
     <ng-container matColumnDef="date">
@@ -41,4 +48,5 @@
         (mouseover)="row.tableRowHovered = true" (mouseout)="row.tableRowHovered = false"></tr>
 </table>
 
-<mat-paginator [pageSizeOptions]="[5,10,25]" class="pb-4" (page)="onPaginateChange($event)" *ngIf="entriesExist"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5,10,25]" class="pb-4" (page)="onPaginateChange($event)" *ngIf="entriesExist">
+</mat-paginator>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IrisService } from 'src/app/shared/services/iris/iris.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -12,6 +12,7 @@ import { UtilsService } from 'src/app/shared/services/utils/utils.service';
   styleUrls: ['./calendar-create.component.css'],
 })
 export class CalendarCreateComponent implements OnInit {
+  @Output() buttonClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
   private readonly defaultReminders: string[] = ["1:00", "0:30", "0:15"];
   public formFields: FormGroup;
   public reminders: string[];
@@ -52,10 +53,10 @@ export class CalendarCreateComponent implements OnInit {
         this.reminders.push(time);
       }
       else {
-        // toast : already added a reminder for that time.
+        this.toast.Error("Already added a reminder for that time.")
       }
     } {
-      // toast: invalid time provided.
+      this.toast.Error("Invalid value for time provided.")
     }
   }
 
@@ -77,7 +78,13 @@ export class CalendarCreateComponent implements OnInit {
       Description: this.formFields.get("fDescription").value,
     }
     this.iris.PostCalendarEntry(patientId, newEntry).subscribe(
-      r => this.toast.Success("Created calendar entry successfully."),
+      r => {this.toast.Success("Created calendar entry successfully."); this.Return()},
       error => this.toast.Error(error.error));
+  }
+
+
+
+  Return(){
+    this.buttonClicked.emit(true);
   }
 }

@@ -4,6 +4,7 @@ import { IPatient } from "../../shared/models/IPatient";
 import { Observable, interval, timer } from "rxjs";
 import { PlotLineOrBand } from "highcharts";
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { UtilsService } from 'src/app/shared/services/utils/utils.service';
 
 const POLLING_RATE: number = 3000;
 
@@ -17,10 +18,11 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
   public onlinePatients: IPatient[] = [];
   public offlinePatients: IPatient[] = [];
   public connected: boolean = false;
+  public troubleConnecting: boolean = false;
   private timer;
   private subscriber;
 
-  constructor(private iris: IrisService, private toast: ToastService) {}
+  constructor(private iris: IrisService, private toast: ToastService, private utils: UtilsService) { }
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
@@ -28,6 +30,7 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ObservePatients();
+    this.MonitorConnectivityIssues();
   }
 
   private ObservePatients(): void {
@@ -39,6 +42,7 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
         this.onlinePatients = [];
         this.offlinePatients = [];
         this.connected = true;
+        this.troubleConnecting = false;
         data.forEach((patient: IPatient) => {
           switch (patient.status) {
             case "alert":
@@ -55,5 +59,13 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
           (error) => this.toast.Error(error.error);
       });
     });
+  }
+
+  private async MonitorConnectivityIssues() {
+    this.utils.Delay(POLLING_RATE).then(() => {
+      if (!this.connected) {
+        this.troubleConnecting = true;
+      }
+    })
   }
 }

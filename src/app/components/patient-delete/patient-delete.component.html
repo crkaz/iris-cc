@@ -11,7 +11,7 @@
                 </mat-form-field>
 
                 <!-- CONFIRM BUTTON -->
-                <button mat-button class="hide-routerlink" [disabled]="!formFields.valid" (click)="OpenConfirmDialog()">
+                <button mat-button class="hide-routerlink" type="submit" [disabled]="!formFields.valid" (click)="OpenConfirmDialog()" color="warn">
                     CONFIRM DELETE
                 </button>
             </mat-card>

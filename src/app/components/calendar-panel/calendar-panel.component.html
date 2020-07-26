@@ -8,15 +8,8 @@
     </div>
     <!-- CREATE -->
     <div *ngIf="creating">
-        <app-calendar-create *ngIf="creating"></app-calendar-create>
+        <app-calendar-create *ngIf="creating" (buttonClicked)="creating = false"></app-calendar-create>
         <div class="row pt-4">
-            <!-- <button mat-button class="hide-routerlink col-5" (click)="creating = false;">
-                CANCEL
-            </button>
-            <div class=col-2></div>
-            <button mat-button type="submit" class="hide-routerlink col-5" >
-                CREATE
-            </button> -->
         </div>
     </div>
 </div>

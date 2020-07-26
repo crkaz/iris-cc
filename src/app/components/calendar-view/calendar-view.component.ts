@@ -14,6 +14,7 @@ import { ToastService } from "src/app/shared/services/toast/toast.service";
 export class CalendarViewComponent implements OnInit {
   displayedColumns: string[] = ["date", "time", "description", "tools"];
   dataSource: MatTableDataSource<ICalendarEntry>;
+  loaded: boolean = false;
   entriesExist: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -49,6 +50,7 @@ export class CalendarViewComponent implements OnInit {
         data.sort((a, b) => (a.Start > b.Start ? 1 : -1)); // Sort ascending (soonest events first).
         this.dataSource = new MatTableDataSource<ICalendarEntry>(data);
         this.dataSource.paginator = this.paginator;
+        this.loaded = true;
       }),
       (error) => this.toast.Error(error.error);
   }

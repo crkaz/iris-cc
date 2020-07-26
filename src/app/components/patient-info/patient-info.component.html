@@ -47,8 +47,8 @@
 
             <!-- EDIT BUTTON -->
             <div style="position:absolute; bottom: 10px; right: 10px;">
-                <button mat-button class="hide-routerlink pl-4 pr-4" (click)="editing = !editing"
-                    *ngIf="editing">CANCEL</button>
+                <button mat-button color="warn" class="hide-routerlink pl-4 pr-4" (click)="editing = !editing"
+                    *ngIf="editing" type="button">CANCEL</button>
                 <button mat-button class="hide-routerlink pl-4 pr-4" type="submit"
                     (click)="Edit()">{{editing ? 'SAVE' : 'EDIT'}}</button>
             </div>

@@ -2,11 +2,19 @@
     <mat-card-title style="text-align: left;">Activity Logs</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content class="mt-4">
-        <div *ngIf="!entriesExist" class="centre">
+        <!-- PLACEHOLDER -->
+        <div *ngIf="!entriesExist && loaded" class="centre">
             <mat-icon>domain_disabled</mat-icon>
             <p>No entries yet.</p>
         </div>
-        <table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;" *ngIf="entriesExist">
+        
+        <!-- LOADER -->
+        <div *ngIf="!loaded">
+            <mat-spinner style="margin: 0 auto;"></mat-spinner>
+        </div>
+
+        <!-- LOADED CONTENT -->
+        <table mat-table [dataSource]="dataSource" class="w-100" style="text-align: left;" *ngIf="entriesExist && loaded">
 
             <!-- Date Column -->
             <ng-container matColumnDef="date">
@@ -29,7 +37,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns; let element"
                 [ngClass]="{tableRowHovered: row.tableRowHovered}"
-                (mouseover)="row.tableRowHovered = true; SelectLog(element)" (mouseout)="row.tableRowHovered = false"
+                (mouseover)="row.tableRowHovered = true; SelectLog(element)" (mouseout)="row.tableRowHovered = false; moreInfo = null;"
                 (click)="SelectLog(element)"></tr>
         </table>
 

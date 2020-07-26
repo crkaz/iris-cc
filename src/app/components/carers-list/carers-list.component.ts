@@ -13,6 +13,7 @@ import { ToastService } from "src/app/shared/services/toast/toast.service";
   styleUrls: ["./carers-list.component.css"],
 })
 export class CarersListComponent implements OnInit {
+  public loaded: boolean = false;
   displayedColumns: string[] = ["username", "role", "assignedPatients"];
   selectedRole: string = "formal";
   dataSource: MatTableDataSource<ICarer>;
@@ -20,7 +21,7 @@ export class CarersListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
 
-  constructor(private iris: IrisService, private toast: ToastService) {}
+  constructor(private iris: IrisService, private toast: ToastService) { }
 
   async ngOnInit() {
     await this.LoadCarers();
@@ -33,14 +34,15 @@ export class CarersListComponent implements OnInit {
         let newVal: ICarer = {
           email: carer["Email"],
           patients: carer["AssignedPatientIds"]
-            ? carer["AssignedPatientIds"].split(",")
-            : [],
+            ? (carer["AssignedPatientIds"].includes(",") ? carer["AssignedPatientIds"].split(",") : carer["AssignedPatientIds"])
+            : [], // Split comma separated list if there is more than one element.
           role: carer["User"]["Role"],
         };
         collection.push(newVal);
       });
       this.dataSource = new MatTableDataSource<ICarer>(collection);
       this.dataSource.paginator = this.paginator;
+      this.loaded = true;
     }),
       (error) => this.toast.Error(error.message);
   }

@@ -15,6 +15,7 @@ export class PatientActivityLogsComponent implements OnInit {
   displayedColumns: string[] = ["date", "time", "activity"];
   dataSource: MatTableDataSource<IActivityLog>;
   moreInfo: string;
+  loaded: boolean = false;
   entriesExist: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -23,7 +24,7 @@ export class PatientActivityLogsComponent implements OnInit {
     private currentUri: ActivatedRoute,
     private iris: IrisService,
     private toast: ToastService
-  ) {}
+  ) { }
 
   async ngOnInit() {
     await this.LoadActivityLogs();
@@ -50,6 +51,7 @@ export class PatientActivityLogsComponent implements OnInit {
         data.sort((a, b) => (a.DateTime > b.DateTime ? -1 : 1)); // Sort ascending.
         this.dataSource = new MatTableDataSource<IActivityLog>(data);
         this.dataSource.paginator = this.paginator;
+        this.loaded = true;
       }),
       (error) => this.toast.Error(error.error);
   }
