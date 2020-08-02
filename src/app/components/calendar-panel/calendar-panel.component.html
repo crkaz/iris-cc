@@ -3,12 +3,12 @@
     (window:resize)="OnResize($event)">
     <!-- VIEW -->
     <div *ngIf="!creating">
-        <button mat-raised-button color="primary" class="w-100" (click)="creating = true;">ADD CALENDAR ENTRY</button>
-        <app-calendar-view></app-calendar-view>
+        <button mat-raised-button color="primary" (click)="creating = true;" class="w-100" type="button">ADD CALENDAR ENTRY</button>
+        <app-calendar-view (editClicked)="EditCalendarEntry($event)"></app-calendar-view>
     </div>
     <!-- CREATE -->
     <div *ngIf="creating">
-        <app-calendar-create *ngIf="creating" (buttonClicked)="creating = false"></app-calendar-create>
+        <app-calendar-create *ngIf="creating" (buttonClicked)="creating = false; entryToEdit = null;" [editing]="entryToEdit"></app-calendar-create>
         <div class="row pt-4">
         </div>
     </div>

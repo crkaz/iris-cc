@@ -5,6 +5,9 @@ import { IActivityLog } from "../../shared/models/IActivityLog";
 import { IrisService } from "src/app/shared/services/iris/iris.service";
 import { ActivatedRoute } from "@angular/router";
 import { ToastService } from "src/app/shared/services/toast/toast.service";
+import { timer } from "rxjs";
+
+const POLLING_RATE: number = 3000;
 
 @Component({
   selector: "app-patient-activity-logs",
@@ -17,6 +20,8 @@ export class PatientActivityLogsComponent implements OnInit {
   moreInfo: string;
   loaded: boolean = false;
   entriesExist: boolean = false;
+  private timer;
+  private subscriber;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -24,36 +29,37 @@ export class PatientActivityLogsComponent implements OnInit {
     private currentUri: ActivatedRoute,
     private iris: IrisService,
     private toast: ToastService
-  ) { }
+  ) {}
 
-  async ngOnInit() {
-    await this.LoadActivityLogs();
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
   }
 
-  onPaginateChange(pagination) {
-    this.LoadActivityLogs("all", pagination.pageSize);
+  ngOnInit() {
+    this.LoadActivityLogs();
   }
 
-  private async LoadActivityLogs(
-    pageIndex: string = "all",
-    pageSize: string = "4"
-  ) {
+  private LoadActivityLogs(pageIndex: string = "all", pageSize: string = "4") {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
 
-    this.iris
-      .GetPatientActivityLogs(patientId, pageIndex, pageSize)
-      .subscribe((data: IActivityLog[]) => {
-        if (data.length > 0) {
-          this.entriesExist = true;
-        } else {
-          this.entriesExist = false;
-        }
-        data.sort((a, b) => (a.DateTime > b.DateTime ? -1 : 1)); // Sort ascending.
-        this.dataSource = new MatTableDataSource<IActivityLog>(data);
-        this.dataSource.paginator = this.paginator;
-        this.loaded = true;
-      }),
-      (error) => this.toast.Error(error.error);
+    // Load/observe colleciton on the server.
+    this.timer = timer(0, POLLING_RATE);
+    this.subscriber = this.timer.subscribe(() => {
+      this.iris
+        .GetPatientActivityLogs(patientId, pageIndex, pageSize)
+        .subscribe((data: IActivityLog[]) => {
+          if (data.length > 0) {
+            this.entriesExist = true;
+          } else {
+            this.entriesExist = false;
+          }
+          data.sort((a, b) => (a.DateTime > b.DateTime ? -1 : 1)); // Sort ascending.
+          this.dataSource = new MatTableDataSource<IActivityLog>(data);
+          this.dataSource.paginator = this.paginator;
+          this.loaded = true;
+        }),
+        (error) => this.toast.Error(error.error);
+    });
   }
 
   public SelectLog(element: IActivityLog): void {

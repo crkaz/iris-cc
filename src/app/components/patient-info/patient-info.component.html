@@ -15,7 +15,7 @@
             </p>
             <mat-form-field class="d-block" *ngIf="editing" style="max-width:60%">
                 <mat-label>Age</mat-label>
-                <mat-select  formControlName="fAge">
+                <mat-select formControlName="fAge">
                     <mat-option *ngFor="let range of ageRangeEnum;let i = index" [value]="i">
                         {{range}}
                     </mat-option>

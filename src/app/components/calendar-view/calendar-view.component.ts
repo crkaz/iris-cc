@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { ICalendarEntry } from "../../shared/models/ICalendarEntry";
@@ -12,6 +18,9 @@ import { ToastService } from "src/app/shared/services/toast/toast.service";
   styleUrls: ["./calendar-view.component.css"],
 })
 export class CalendarViewComponent implements OnInit {
+  @Output() editClicked: EventEmitter<ICalendarEntry> = new EventEmitter<
+    ICalendarEntry
+  >();
   displayedColumns: string[] = ["date", "time", "description", "tools"];
   dataSource: MatTableDataSource<ICalendarEntry>;
   loaded: boolean = false;
@@ -27,10 +36,6 @@ export class CalendarViewComponent implements OnInit {
 
   async ngOnInit() {
     await this.LoadCalendarEntries();
-  }
-
-  onPaginateChange(pagination) {
-    this.LoadCalendarEntries("all", pagination.pageSize);
   }
 
   private async LoadCalendarEntries(
@@ -53,5 +58,19 @@ export class CalendarViewComponent implements OnInit {
         this.loaded = true;
       }),
       (error) => this.toast.Error(error.error);
+  }
+
+  public DeleteEntry(entryId: string) {
+    this.iris.DeleteCalendarEntry(entryId).subscribe(
+      (r) => {
+        this.toast.Success("Deleted successfully.");
+        this.LoadCalendarEntries();
+      },
+      (error) => this.toast.Error(error.error)
+    );
+  }
+
+  public EditEntry(entry: ICalendarEntry) {
+    this.editClicked.emit(entry);
   }
 }

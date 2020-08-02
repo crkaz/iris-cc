@@ -69,7 +69,7 @@ export class PatientInfoComponent implements OnInit {
   public Edit() {
     const patientId = this.currentUri.snapshot.paramMap.get("id"); // Get patient id from URI.
     if (this.editing) {
-      if (!this.formFields.untouched) {
+      if (this.formFields.dirty) {
         // Only make the edit request if fields have been modified.
         this.patient.Age = this.formFields.get("fAge").value;
         this.patient.Diagnosis = this.formFields.get("fDiagnosis").value;

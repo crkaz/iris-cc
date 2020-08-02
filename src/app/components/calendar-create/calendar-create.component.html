@@ -25,14 +25,15 @@
     </mat-form-field>
 
     <!-- REMINDERS -->
-    <mat-form-field class="d-block" matTooltipPosition="above" matTooltip="Pre-warn patients some hours and minutes before the actual event.">
+    <mat-form-field class="d-block" matTooltipPosition="above"
+        matTooltip="Pre-warn patients some hours and minutes before the actual event.">
         <mat-label>Reminders<mat-icon class="ml-2">
                 info</mat-icon>
         </mat-label>
         <button mat-raised-button color="primary" class="w-100 hide-routerlink ml-3" matSuffix
             (click)="AddReminder()">ADD
             REMINDER</button>
-        <input matInput type="time" formControlName="fReminders"/>
+        <input matInput type="time" formControlName="fReminders" />
     </mat-form-field>
     <mat-chip-list #chipList>
         <mat-chip *ngFor="let reminder of reminders" [selectable]="true" [removable]="true"
@@ -48,8 +49,9 @@
             CANCEL
         </button>
         <div class=col-2></div>
-        <button mat-button type="submit" class="hide-routerlink col-5" [disabled]="!formFields.valid" (click)="CreateCalendarEntry()">
-            CREATE
+        <button mat-button type="submit" class="hide-routerlink col-5" [disabled]="!formFields.valid"
+            (click)="CreateCalendarEntry()">
+            {{editing ? 'SAVE CHANGES' : 'CREATE'}}
         </button>
     </div>
 </form>

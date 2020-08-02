@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { IrisService } from "src/app/shared/services/iris/iris.service";
 import { IPatient } from "../../shared/models/IPatient";
-import { Observable, interval, timer } from "rxjs";
-import { PlotLineOrBand } from "highcharts";
-import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { UtilsService } from 'src/app/shared/services/utils/utils.service';
+import { timer } from "rxjs";
+import { ToastService } from "src/app/shared/services/toast/toast.service";
+import { UtilsService } from "src/app/shared/services/utils/utils.service";
 
 const POLLING_RATE: number = 3000;
 
@@ -22,7 +21,11 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
   private timer;
   private subscriber;
 
-  constructor(private iris: IrisService, private toast: ToastService, private utils: UtilsService) { }
+  constructor(
+    private iris: IrisService,
+    private toast: ToastService,
+    private utils: UtilsService
+  ) {}
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
@@ -66,6 +69,6 @@ export class PatientDashboardComponent implements OnInit, OnDestroy {
       if (!this.connected) {
         this.troubleConnecting = true;
       }
-    })
+    });
   }
 }

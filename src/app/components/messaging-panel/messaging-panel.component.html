@@ -1,7 +1,7 @@
 <h5>Message Patient</h5>
 <div style="text-align: left;" class="mat-scroll px-2 pb-4" [style.height.px]="SectionHeight"
     (window:resize)="onResize($event)">
-    <div *ngIf="messageSent" class="centre">
+    <div *ngIf="messageSent" class="centre" style="top:350px">
         <mat-icon style="font-size: 54px;" class="pl-1">mark_email_read</mat-icon>
         <p class="text-large">Success!</p>
     </div>

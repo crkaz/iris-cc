@@ -5,5 +5,5 @@ export interface ICalendarEntry {
   End: Date;
   Repeat: Repetition;
   Description: string;
-  Reminders: string[];
+  Reminders: string;
 }

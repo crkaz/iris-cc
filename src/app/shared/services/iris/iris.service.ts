@@ -11,8 +11,7 @@ import { ICarer } from "../../models/ICarer";
 
 const BASE_URL = "http://localhost:54268/api/";
 const CARER_API_KEY = "testcarer";
-const HEADERS = new HttpHeaders({ "ApiKey": CARER_API_KEY });
-
+const HEADERS = new HttpHeaders({ ApiKey: CARER_API_KEY });
 
 export interface Message {
   author: string;
@@ -23,17 +22,7 @@ export interface Message {
   providedIn: "root",
 })
 export class IrisService {
-  //#region options: {
-  //   headers?: HttpHeaders | {[header: string]: string | string[]},
-  //   observe?: 'body' | 'events' | 'response',
-  //   params?: HttpParams|{[param: string]: string | string[]},
-  //   reportProgress?: boolean,
-  //   responseType?: 'arraybuffer'|'blob'|'json'|'text',
-  //   withCredentials?: boolean,
-  // }
-  //#endregion
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public GetPatients() {
     const endpoint: string = BASE_URL + "carer/patients/";
@@ -134,7 +123,7 @@ export class IrisService {
     const endpoint: string = BASE_URL + "carer/allocate/";
     const options = {
       headers: new HttpHeaders({
-        "ApiKey": CARER_API_KEY,
+        ApiKey: CARER_API_KEY,
         "Content-Type": "application/json",
       }),
       responseType: "text" as "json",
@@ -157,7 +146,28 @@ export class IrisService {
     return this.http.post<ICalendarEntry>(endpoint, body, options);
   }
 
-  public PutCalendarEntry() { }
+  public DeleteCalendarEntry(entryId: string) {
+    const endpoint: string = BASE_URL + "calendar/delete/";
+    const options = {
+      headers: HEADERS,
+      params: new HttpParams().set("id", entryId),
+      responseType: "text" as "json",
+    };
 
-  public DeleteCalendarEntry() { }
+    return this.http.delete(endpoint, options);
+  }
+
+  public PutCalendarEntry(entryId: string, body: ICalendarEntry) {
+    const endpoint: string = BASE_URL + "calendar/put/";
+    const options = {
+      headers: new HttpHeaders({
+        ApiKey: CARER_API_KEY,
+        "Content-Type": "application/json",
+      }),
+      params: new HttpParams().set("id", entryId),
+      responseType: "text" as "json",
+    };
+
+    return this.http.put(endpoint, body, options);
+  }
 }
